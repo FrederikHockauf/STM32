@@ -13,7 +13,7 @@ int main(void)
 {
   hal_setup();
 
-  hal_led_on();
+  hal_led_on(); // Turns on the LED lights
 
   for (int rounds = 0; rounds < 10; rounds++)
   {
@@ -23,6 +23,8 @@ int main(void)
 
     for (int i = 0; i < 4; i++)
       val = val << 8 | hal_getchar();
+    
+    printf(hal_getchar());
 
     uint64_t t_start = hal_get_time();
 
@@ -36,13 +38,13 @@ int main(void)
 
     printf("%i time: %u    ", val, (unsigned) (t_stop - t_start));
 
-#ifdef STM32F4  // assembler demo only for the target device
+  #ifdef STM32F4  // assembler demo only for the target device
     val = test_asm(1);
 
     printf("asm: %x + 1 = %x\n", somedata, val);
-#else
+  #else
     printf("\n");
-#endif
+  #endif
 
   }
 
