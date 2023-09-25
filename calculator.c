@@ -9,6 +9,27 @@ int test_asm(int);
 extern int somedata; // = 0x12345678;
 #endif
 
+
+
+
+int get_4bytes()
+{
+  int variable = 0;
+
+  for (int i = 0; i < 4; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
+      variable = variable << 8 | hal_getchar();
+  
+  return variable;
+}
+
+void set_4bytes(int variable)
+{
+  for (int i = 3; i >= 0; i--)
+      hal_putchar((variable >> i*8) & 0xff);
+}
+
+
+
 int main(void)
 {
   hal_setup();
@@ -91,20 +112,4 @@ int main(void)
   while (1)
     ;
   return 0;
-}
-
-int get_4bytes()
-{
-  int variable = 0;
-
-  for (int i = 0; i < 4; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
-      variable = variable << 8 | hal_getchar();
-  
-  return variable;
-}
-
-void set_4bytes(int variable)
-{
-  for (int i = 3; i >= 0; i--)
-      hal_putchar((variable >> i*8) & 0xff);
 }
