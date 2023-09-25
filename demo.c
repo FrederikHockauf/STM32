@@ -30,8 +30,17 @@ int main(void)
 
     uint64_t t_stop = hal_get_time(); // Create a variable to keep track of end time
 
+    for (int i = 0; i < 4; i++)
+      hal_putchar((val >> ((3-i)*8)) & 0xff);
+
     for (int i = 4; i > 0; i--)
       hal_putchar((val >> ((3-i)*8)) & 0xff);
+
+    for (int i = 4; i > 0; i--)
+      hal_putchar((val >> i*8) & 0xff);
+
+    for (int i = 4; i > 0; i--)
+      hal_putchar(0xff);
 
 
     printf("%i time: %u    ", val, (unsigned) (t_stop - t_start));

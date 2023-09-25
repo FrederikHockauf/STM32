@@ -24,11 +24,19 @@ while True:
   dev.write(data)
   print("Flag 5")
 
-  res = int.from_bytes(dev.read(4), 'big')
+  res1 = int.from_bytes(dev.read(4), 'big')
+  res2 = int.from_bytes(dev.read(4), 'big')
+  res3 = int.from_bytes(dev.read(4), 'big')
+  res4 = int.from_bytes(dev.read(4), 'big')
   print("Flag 6")
 
-  print((v*3 - res) == 0)
+  print((v*3 - res1) == 0)
   print("Flag 7")
+  print(res1)
+  print(res2)
+  print(res3)
+  print(res4)
+
   
   
   x = dev.readline()
