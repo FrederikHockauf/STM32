@@ -64,11 +64,11 @@ for i in range(10):
 
     ret = int.from_bytes(dev.read(1), 'big')
   
-    #if opcodes[ret] == "TME":
-    #  res = int.from_bytes(dev.read(4), 'big')
-    #  print("  time:", res)
-    #else:
-    #  print("ERROR!\n")
+    if opcodes[ret] == "TME":
+      res = int.from_bytes(dev.read(4), 'big')
+      print("  time:", res)
+    else:
+      print("ERROR!\n")
   else:
     print("ERROR!\n")
 

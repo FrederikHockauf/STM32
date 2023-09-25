@@ -35,19 +35,19 @@ int main(void)
     switch (opcode)
     {
       case 0:
-        operand_b = load_4bytes();
+        operand_b = get_4bytes();
         t_start = hal_get_time();
         printf("This is addition with %i\n", operand_a);
         t_stop = hal_get_time();
         break;
       case 1:
-        operand_b = load_4bytes();
+        operand_b = get_4bytes();
         t_start = hal_get_time();
         printf("This is multiplication with %i\n", operand_a);
         t_stop = hal_get_time();
         break;
       case 2:
-        operand_b = load_4bytes();
+        operand_b = get_4bytes();
         t_start = hal_get_time();
         printf("This is exponentiation with %i\n", operand_a);
         t_stop = hal_get_time();
@@ -58,19 +58,20 @@ int main(void)
         t_stop = hal_get_time();
         break;
       case 4:
-        operand_b = load_4bytes();
+        operand_b = get_4bytes();
         t_start = hal_get_time();
         printf("This is Res with %i\n", operand_a);
         t_stop = hal_get_time();
         break;
       case 5:
-        operand_b = load_4bytes();
+        operand_b = get_4bytes();
         t_start = hal_get_time();
         printf("This is Tme with %i\n", operand_a);
         t_stop = hal_get_time();
+        set_4bytes(t_stop - t_start);
         break;
       case 255:
-        operand_b = load_4bytes();
+        operand_b = get_4bytes();
         t_start = hal_get_time();
         printf("This is ERR with %i\n", operand_a);
         t_stop = hal_get_time();
@@ -92,7 +93,7 @@ int main(void)
   return 0;
 }
 
-int load_4bytes()
+int get_4bytes()
 {
   int variable = 0;
 
@@ -100,4 +101,10 @@ int load_4bytes()
       variable = variable << 8 | hal_getchar();
   
   return variable;
+}
+
+void set_4bytes(int variable)
+{
+  for (int i = 3; i >= 0; i--)
+      hal_putchar((variable >> i*8) & 0xff);
 }
