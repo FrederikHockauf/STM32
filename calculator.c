@@ -28,37 +28,62 @@ int main(void)
     // Send back the opcode
     hal_putchar(opcode);
 
+    // Get time variables
+    uint64_t t_start = hal_get_time();
+    uint64_t t_stop = hal_get_time();
+
     switch (opcode)
     {
       case 0:
         operand_b = load_4bytes();
+        t_start = hal_get_time();
         printf("This is addition with %i\n", operand_a);
+        t_stop = hal_get_time();
         break;
       case 1:
         operand_b = load_4bytes();
+        t_start = hal_get_time();
         printf("This is multiplication with %i\n", operand_a);
+        t_stop = hal_get_time();
         break;
       case 2:
         operand_b = load_4bytes();
+        t_start = hal_get_time();
         printf("This is exponentiation with %i\n", operand_a);
+        t_stop = hal_get_time();
         break;
       case 3:
+        t_start = hal_get_time();
         printf("This is incrementation with %i\n", operand_a);
+        t_stop = hal_get_time();
         break;
       case 4:
         operand_b = load_4bytes();
+        t_start = hal_get_time();
         printf("This is Res with %i\n", operand_a);
+        t_stop = hal_get_time();
         break;
       case 5:
         operand_b = load_4bytes();
+        t_start = hal_get_time();
         printf("This is Tme with %i\n", operand_a);
+        t_stop = hal_get_time();
         break;
       case 255:
         operand_b = load_4bytes();
+        t_start = hal_get_time();
         printf("This is ERR with %i\n", operand_a);
+        t_stop = hal_get_time();
         break;
     }
+
+    // Send back the opcode (again??)
+    hal_putchar(opcode);
+
+
+
   }
+
 
   hal_led_off();
 

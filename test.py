@@ -62,7 +62,7 @@ for i in range(10):
       print("back and INC'ing --- to be implemented")
       #print((a+1) & 0xffffffff == res, end =" ")
 
-    #ret = int.from_bytes(dev.read(1), 'big')
+    ret = int.from_bytes(dev.read(1), 'big')
   
     #if opcodes[ret] == "TME":
     #  res = int.from_bytes(dev.read(4), 'big')
