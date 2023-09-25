@@ -29,7 +29,6 @@ void set_4bytes(int variable)
 }
 
 
-
 int main(void)
 {
   hal_setup();
@@ -43,7 +42,7 @@ int main(void)
     opcode = opcode << 8 | hal_getchar();
 
     // Initialize the two operands
-    int operand_a = load_4bytes();
+    int operand_a = get_4bytes();
     int operand_b = -1;
 
     // Send back the opcode
