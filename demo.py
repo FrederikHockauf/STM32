@@ -9,18 +9,30 @@ if len(sys.argv) < 2:
 dev = serial.Serial(sys.argv[1], 115200)
 
 while True:
+  print("---| Begin loop |---")
   x = dev.readline()
+  print("Flag 1")
   print(x.decode())
+  print("Flag 2")
 
   v = 16975083
+  print("Flag 3")
+ 
 
   data = v.to_bytes(4, 'big')
+  print("Flag 4")
   dev.write(data)
+  print("Flag 5")
 
   res = int.from_bytes(dev.read(4), 'big')
+  print("Flag 6")
 
   print((v*3 - res) == 0)
-
+  print("Flag 7")
+  
+  
   x = dev.readline()
+  print("Flag 8")
   print(x.decode())
+  print("---| End loop |---")
 
