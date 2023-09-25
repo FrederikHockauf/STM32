@@ -19,18 +19,18 @@ int main(void)
   {
     printf("Hello world from \"%s\"!\n", _elf_name);
 
-    int val = 0;
+    int val = 0; // Initialize the variable
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 4; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
       val = val << 8 | hal_getchar();
 
-    uint64_t t_start = hal_get_time();
+    uint64_t t_start = hal_get_time(); // Create a variable to keep track of start time
 
-    val *= 3;
+    val *= 3; // Create a new value to send back. This is just to check that the initial input from Python went through correctly
 
-    uint64_t t_stop = hal_get_time();
+    uint64_t t_stop = hal_get_time(); // Create a variable to keep track of end time
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 4; i > 0; i--)
       hal_putchar((val >> ((3-i)*8)) & 0xff);
 
 
