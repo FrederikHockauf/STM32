@@ -20,7 +20,10 @@ opcodes = {
 
 single_operand = ["INC"]
 
+print("before the loop")
+
 for i in range(10):
+  print("in the loop")
   opc = random.choice([0,1,2,3])
 
   print(opcodes[opc], end =" ")
