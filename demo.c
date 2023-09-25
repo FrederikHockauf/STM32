@@ -18,7 +18,7 @@ int main(void)
   for (int rounds = 0; rounds < 10; rounds++)
   {
     printf("=====| Cycle Start |=====\n");
-    //printf("Hello world from \"%s\"!\n", _elf_name);
+    //printf("Hello worlds from \"%s\"!\n", _elf_name);
 
     int val = 0;
 

@@ -13,7 +13,7 @@ while True:
   x = dev.readline()
   print("Flag 1")
   print(x.decode())
-  print("Flag 2")
+  print("Flag 2.1")
 
   v = 16975083
   print("Flag 3")
