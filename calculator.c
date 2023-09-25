@@ -49,8 +49,8 @@ int main(void)
     hal_putchar(opcode >> 8*3 & 0xff);
 
     // Get time variables
-    uint64_t t_start = hal_get_time();
-    uint64_t t_stop = hal_get_time();
+    uint64_t t_start;
+    uint64_t t_stop;
 
     switch (opcode)
     {
@@ -98,8 +98,8 @@ int main(void)
         break;
     }
 
-    // Send back the opcode (again??)
-    hal_putchar(opcode >> 8*3 & 0xff);
+    // Send back the opcode (again?)
+    hal_putchar(opcode 0xff);
 
 
 
