@@ -15,16 +15,19 @@ include config.mk
 # additional dependencies for your the target TARGETNAME.elf file (just
 # define the dependencies, a generic rule for .elf target exists in
 # config.mk).
-DEMO_SRC = demo.c
+CALCULATOR_SRC = calculator.c
+
 ifeq ($(TARGET),stm32f4)
-  DEMO_SRC += demo.S
+  CALCULATOR_SRC += demo.S # <-------------------- Change this away from the demo
 endif
-DEMO_OBJ = $(call objs,$(DEMO_SRC))
-demo.elf: $(DEMO_OBJ) libhal.a
+
+CALCULTATOR_OBJ = $(call objs,$(CALCULATOR_SRC))
+
+demo.elf: $(CALCULTATOR_OBJ) libhal.a
 
 
 # Don't forget to add all objects to the OBJ variable
-OBJ += $(DEMO_OBJ)
+OBJ += $(CALCULTATOR_OBJ) # <-------------------- Check this works
 
 # Include generated dependencies
 -include $(filter %.d,$(OBJ:.o=.d))
