@@ -51,7 +51,7 @@ for i in range(10):
       #print((a+b) & 0xffffffff == res, end =" ")
 
     if opcodes[opc] == "MUL":
-      print("back and MUL'ing --- to be implemented")
+      print("back and MULT'ing --- to be implemented")
       #print((a*b) & 0xffffffff == res, end =" ")
 
     if opcodes[opc] == "EXP":
