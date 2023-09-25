@@ -20,11 +20,7 @@ int main(void)
     int opcode = 0;
     opcode = opcode << 8 | hal_getchar();
 
-    int operand_a = 0;
-
-    for (int i = 0; i < 4; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
-      operand_a = operand_a << 8 | hal_getchar();
-
+    int operand_a = load_4bytes();
 
     switch (opcode)
     {
@@ -57,4 +53,14 @@ int main(void)
   while (1)
     ;
   return 0;
+}
+
+int load_4bytes()
+{
+  int variable = 0;
+
+  for (int i = 0; i < 4; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
+      variable = variable << 8 | hal_getchar();
+  
+  return variable;
 }

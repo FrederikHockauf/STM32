@@ -31,15 +31,15 @@ for i in range(10):
   dev.write(opc.to_bytes(1, 'big'))
 
   a = random.randint(0, 1<<32-1)
-  print("\n---- number = %i", a)
-  print("\n---- bit = %i", a.to_bytes(4, 'big'))
-
 
   dev.write(a.to_bytes(4, 'big'))
 
   b = -1
 
-
+#  if opcodes[opc] not in single_operand:
+#    b = random.randint(0, 1<<32-1)
+#
+#    dev.write(b.to_bytes(4, 'big'))
 
 
 
