@@ -17,11 +17,16 @@ int main(void)
 
   for (int rounds = 0; rounds < 10; rounds++)
   {
+    // Initialize the opcode and retrieve it from the computer
     int opcode = 0;
     opcode = opcode << 8 | hal_getchar();
 
+    // Initialize the two operands
     int operand_a = load_4bytes();
     int operand_b = -1;
+
+    // Send back the opcode
+    hal_putchar(opcode);
 
     switch (opcode)
     {

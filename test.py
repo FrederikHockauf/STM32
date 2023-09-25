@@ -39,17 +39,45 @@ for i in range(10):
   if opcodes[opc] not in single_operand:
     b = random.randint(0, 1<<32-1)
 
-    print("the annoying one")
-
     dev.write(b.to_bytes(4, 'big'))
 
+  ret = int.from_bytes(dev.read(1), 'big')
+
+  if opcodes[ret] != "ERR":
+    res = int.from_bytes(dev.read(4), 'big')
+
+    if opcodes[opc] == "ADD":
+      print("back and ADD'ing --- to be implemented")
+      #print((a+b) & 0xffffffff == res, end =" ")
+
+    if opcodes[opc] == "MUL":
+      print("back and MUL'ing --- to be implemented")
+      #print((a*b) & 0xffffffff == res, end =" ")
+
+    if opcodes[opc] == "EXP":
+      print("back and EXP'ing --- to be implemented")
+      #print(pow(a, b, 1<<32) == res, end =" ")
+
+    if opcodes[opc] == "INC":
+      print("back and INC'ing --- to be implemented")
+      #print((a+1) & 0xffffffff == res, end =" ")
+
+    ret = int.from_bytes(dev.read(1), 'big')
+  
+    if opcodes[ret] == "TME":
+      res = int.from_bytes(dev.read(4), 'big')
+    
+      print("  time:", res)
+    else:
+      print("ERROR!\n")
+  else:
+    print("ERROR!\n")
+
+  x = dev.readline() #---------------------- Don't forget these
+  print(x.decode()) #---------------------- Don't forget these
 
 
+dev.close()
 
-
-
-
-  x = dev.readline()
-  print(x.decode())
 
 
