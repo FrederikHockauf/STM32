@@ -46,7 +46,7 @@ int main(void)
     int operand_b = -1;
 
     // Send back the opcode
-    hal_putchar(opcode);
+    hal_putchar(opcode & 0xff);
 
     // Get time variables
     uint64_t t_start = hal_get_time();
@@ -99,7 +99,7 @@ int main(void)
     }
 
     // Send back the opcode (again??)
-    hal_putchar(opcode);
+    hal_putchar(opcode & 0xff);
 
 
 
