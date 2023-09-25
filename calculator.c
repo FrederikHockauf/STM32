@@ -17,32 +17,33 @@ int main(void)
 
   for (int rounds = 0; rounds < 10; rounds++)
   {
-    printf("Hello world from \"%s\"!\n", _elf_name);
+    int opcode = 0;
+    opcode = opcode << 8 | hal_getchar();
 
-    int val = 0; // Initialize the variable
-
-    for (int i = 0; i < 4; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
-      val = val << 8 | hal_getchar();
-
-    uint64_t t_start = hal_get_time(); // Create a variable to keep track of start time
-
-    val *= 3; // Create a new value to send back. This is just to check that the initial input from Python went through correctly
-
-    uint64_t t_stop = hal_get_time(); // Create a variable to keep track of end time
-
-    for (int i = 3; i >= 0; i--)
-      hal_putchar((val >> i*8) & 0xff);
-
-    printf("%i time: %u    ", val, (unsigned) (t_stop - t_start));
-
-#ifdef STM32F4  // assembler demo only for the target device
-    val = test_asm(1);
-
-    printf("asm: %x + 1 = %x\n", somedata, val);
-#else
-    printf("\n");
-#endif
-
+    switch (opcode)
+    {
+      case 0:
+        printf("This is addition\n")
+        break;
+      case 1:
+        printf("This is multiplication\n")
+        break;
+      case 2:
+        printf("This is exponentiation\n")
+        break;
+      case 3:
+        printf("This is incrementation\n")
+        break;
+      case 4:
+        printf("This is Res\n")
+        break;
+      case 5:
+        printf("This is Tme\n")
+        break;
+      case 255:
+        printf("This is ERR\n")
+        break;
+    }
   }
 
   hal_led_off();
