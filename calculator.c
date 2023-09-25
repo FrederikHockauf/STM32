@@ -23,32 +23,33 @@ int main(void)
     int operand_a = load_4bytes();
     int operand_b = -1;
 
-    if (opcode != 3)
-    {
-      operand_b = load_4bytes();
-    }
-
     switch (opcode)
     {
       case 0:
+        operand_b = load_4bytes();
         printf("This is addition with %i\n", operand_a);
         break;
       case 1:
+        operand_b = load_4bytes();
         printf("This is multiplication with %i\n", operand_a);
         break;
       case 2:
+        operand_b = load_4bytes();
         printf("This is exponentiation with %i\n", operand_a);
         break;
       case 3:
         printf("This is incrementation with %i\n", operand_a);
         break;
       case 4:
+        operand_b = load_4bytes();
         printf("This is Res with %i\n", operand_a);
         break;
       case 5:
+        operand_b = load_4bytes();
         printf("This is Tme with %i\n", operand_a);
         break;
       case 255:
+        operand_b = load_4bytes();
         printf("This is ERR with %i\n", operand_a);
         break;
     }

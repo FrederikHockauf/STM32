@@ -36,10 +36,12 @@ for i in range(10):
 
   b = -1
 
-#  if opcodes[opc] not in single_operand:
-#    b = random.randint(0, 1<<32-1)
-#
-#    dev.write(b.to_bytes(4, 'big'))
+  if opcodes[opc] not in single_operand:
+    b = random.randint(0, 1<<32-1)
+
+    print("the annoying one")
+
+    dev.write(b.to_bytes(4, 'big'))
 
 
 
