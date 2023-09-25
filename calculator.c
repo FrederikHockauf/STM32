@@ -20,28 +20,34 @@ int main(void)
     int opcode = 0;
     opcode = opcode << 8 | hal_getchar();
 
+    int operand_a = 0;
+
+    for (int i = 0; i < 4; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
+      operand_a = operand_a << 8 | hal_getchar();
+
+
     switch (opcode)
     {
       case 0:
-        printf("This is addition\n");
+        printf("This is addition with %i\n", operand_a);
         break;
       case 1:
-        printf("This is multiplication\n");
+        printf("This is multiplication with %i\n", operand_a);
         break;
       case 2:
-        printf("This is exponentiation\n");
+        printf("This is exponentiation with %i\n", operand_a);
         break;
       case 3:
-        printf("This is incrementation\n");
+        printf("This is incrementation with %i\n", operand_a);
         break;
       case 4:
-        printf("This is Res\n");
+        printf("This is Res with %i\n", operand_a);
         break;
       case 5:
-        printf("This is Tme\n");
+        printf("This is Tme with %i\n", operand_a);
         break;
       case 255:
-        printf("This is ERR\n");
+        printf("This is ERR with %i\n", operand_a);
         break;
     }
   }

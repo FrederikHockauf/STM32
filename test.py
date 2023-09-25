@@ -30,6 +30,20 @@ for i in range(10):
 
   dev.write(opc.to_bytes(1, 'big'))
 
+  a = random.randint(0, 1<<32-1)
+
+  dev.write(a.to_bytes(4, 'big'))
+
+  b = -1
+
+
+
+
+
+
+
+
+
   x = dev.readline()
   print(x.decode())
 
