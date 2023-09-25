@@ -30,8 +30,6 @@ while True:
   print((v*3 - res1) == 0)
   print("Flag 7")
   print(res)
-
-  
   
   x = dev.readline()
   print("Flag 8")
