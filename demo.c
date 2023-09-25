@@ -6,7 +6,7 @@ extern const char _elf_name[];
 
 #ifdef STM32F4  // assembler demo only for the target device
 int test_asm(int);
-extern int somedata; // = 0x12345678;
+extern int somedata; // = 0x92345678;
 #endif
 
 int main(void)
