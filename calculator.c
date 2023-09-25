@@ -23,25 +23,25 @@ int main(void)
     switch (opcode)
     {
       case 0:
-        printf("This is addition\n")
+        printf("This is addition\n");
         break;
       case 1:
-        printf("This is multiplication\n")
+        printf("This is multiplication\n");
         break;
       case 2:
-        printf("This is exponentiation\n")
+        printf("This is exponentiation\n");
         break;
       case 3:
-        printf("This is incrementation\n")
+        printf("This is incrementation\n");
         break;
       case 4:
-        printf("This is Res\n")
+        printf("This is Res\n");
         break;
       case 5:
-        printf("This is Tme\n")
+        printf("This is Tme\n");
         break;
       case 255:
-        printf("This is ERR\n")
+        printf("This is ERR\n");
         break;
     }
   }
