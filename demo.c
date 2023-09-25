@@ -36,7 +36,7 @@ int main(void)
     for (int i = 4; i > 0; i--)
       hal_putchar((val >> ((3-i)*8)) & 0xff);
 
-    for (int i = 4; i > 0; i--)
+    for (int i = 3; i >= 0; i--)
       hal_putchar((val >> i*8) & 0xff);
 
     for (int i = 4; i > 0; i--)
