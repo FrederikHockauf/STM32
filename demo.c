@@ -37,7 +37,7 @@ int main(void)
       hal_putchar((val >> ((3-i)*8)) & 0xff);
 
 
-    printf("%i time: %u    ", val, (unsigned) (t_stop - t_start));
+    printf("%i time: %u    ", val, (unsigned) (t_stop - t_start)*2);
 
   #ifdef STM32F4  // assembler demo only for the target device
     val = test_asm(1);
