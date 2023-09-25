@@ -21,6 +21,10 @@ int main(void)
     opcode = opcode << 8 | hal_getchar();
 
     int operand_a = load_4bytes();
+    int operand_b = -1;
+
+    if (opcode != 3)
+      operand_b = load_4bytes();
 
     switch (opcode)
     {
