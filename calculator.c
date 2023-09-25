@@ -24,7 +24,9 @@ int main(void)
     int operand_b = -1;
 
     if (opcode != 3)
+    {
       operand_b = load_4bytes();
+    }
 
     switch (opcode)
     {
