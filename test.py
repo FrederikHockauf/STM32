@@ -63,6 +63,7 @@ for i in range(10):
       #print((a+1) & 0xffffffff == res, end =" ")
 
     ret = int.from_bytes(dev.read(1), 'big')
+    print("Dis is da opcode agen = ", ret)
   
     if opcodes[ret] == "TME":
       res = int.from_bytes(dev.read(4), 'big')
