@@ -6,25 +6,23 @@ extern const char _elf_name[];
 
 #ifdef STM32F4  // assembler demo only for the target device
 int test_asm(int);
-extern int somedata; // = 0x92345678;
+extern int somedata; // = 0x12345678;
 #endif
 
 int main(void)
 {
   hal_setup();
 
-  hal_led_on(); // Turns on the LED lights
+  hal_led_on();
 
   for (int rounds = 0; rounds < 10; rounds++)
   {
-    printf("Hello worlds from \"%s\"!\n", _elf_name);
+    printf("Hello world from \"%s\"!\n", _elf_name);
 
     int val = 0;
 
     for (int i = 0; i < 4; i++)
       val = val << 8 | hal_getchar();
-    
-    printf(hal_getchar());
 
     uint64_t t_start = hal_get_time();
 
@@ -36,16 +34,15 @@ int main(void)
       hal_putchar((val >> ((3-i)*8)) & 0xff);
 
 
-    printf("%i time: %u    ", val, (unsigned) (t_stop - t_start)*2);
+    printf("%i time: %u    ", val, (unsigned) (t_stop - t_start));
 
-  #ifdef STM32F4  // assembler demo only for the target device
+#ifdef STM32F4  // assembler demo only for the target device
     val = test_asm(1);
 
     printf("asm: %x + 1 = %x\n", somedata, val);
-  #else
+#else
     printf("\n");
-  #endif
-  printf("=====| Cycle End |=====\n\n");
+#endif
 
   }
 
