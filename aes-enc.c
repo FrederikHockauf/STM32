@@ -50,7 +50,7 @@ const uint8_t sBox[256] =
 int main()
 {
 	hal_setup();
-	hal_led_on();
+	hal_led_off();
 
 	// Declare and initialize the messge, encrypted message (that we'll transform), the key, and the expanded key
 	uint8_t message[4][4];
