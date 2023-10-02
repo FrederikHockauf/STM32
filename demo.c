@@ -21,7 +21,7 @@ int main(void)
 
     int val = 0; // Initialize the variable
 
-    for (int i = 0; i < 4; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
+    for (int i = 0; i < 4; i++) // Load the 4-byte int in by bitshifting (8 times as 1 byte = 8 bit)
       val = val << 8 | hal_getchar();
 
     uint64_t t_start = hal_get_time(); // Create a variable to keep track of start time
