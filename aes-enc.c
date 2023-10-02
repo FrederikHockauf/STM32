@@ -81,7 +81,9 @@ int main()
 	}
 
     hal_led_off();
-    
+
+    while (true)
+    ;
     return 0;
 }
 
