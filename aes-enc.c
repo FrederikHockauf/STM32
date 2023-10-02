@@ -59,8 +59,14 @@ int main()
 	uint8_t expandedKey[11][4][4];
 
     // Read the data from the computer
-    while (1)
+    for (int i = 1; i <= 10000; i++)
+    {
+        if (i % 1000 < 500)
+            hal_led_on();
+        else
+            hal_led_off();
         printf("Hello world from the program");
+    }
     
 
     ReadBlock(key);
