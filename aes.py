@@ -16,9 +16,9 @@ dev = serial.Serial(sys.argv[1], 115200)
 # run ten tests
 for i in range(10):
   print("---| Begin loop |---\n")
-  #x = dev.readline()
+  x = dev.readline()
   print("Flag 1")
-  #print(x.decode())
+  print(x.decode())
 
 
   # generate random 128 bit key and random 128 bit data block

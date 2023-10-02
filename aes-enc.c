@@ -1,4 +1,5 @@
 #include <hal.h>
+#include <stdio.h>
 #include <stdint.h>
 #include <string.h>
 //#include <stdio.h>
@@ -55,7 +56,7 @@ int main()
 	uint8_t expandedKey[11][4][4];
 
     // Read the data from the computer
-    //printf("Hello world from the program");
+    printf("Hello world from the program");
     
     ReadBlock(key);
     ReadBlock(message);
