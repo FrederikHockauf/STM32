@@ -79,7 +79,7 @@ void ReadBlock(uint8_t block[4][4])
 {
     // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
 	for (int i = 0; i < 4; i++)
-        for (int i = 0; i < 4; i++)
+        for (int j = 0; j < 4; j++)
             block[i][j] = 0 << 8 | hal_getchar();
 }
 
@@ -87,7 +87,7 @@ void WriteBlock(uint8_t block[4][4])
 {
     // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
 	for (int i = 0; i < 4; i++)
-        for (int i = 0; i < 4; i++)
+        for (int j = 0; j < 4; j++)
             hal_putchar((block[i][j] >> ((3 - i) * 8)) & 0xff);
 }
 
