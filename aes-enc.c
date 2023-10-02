@@ -62,16 +62,8 @@ int main()
 		ShiftRows(encMessage);
 		if (i != ROUNDS)
 			MixColumns(encMessage);
-		AddRoundKey(encMessage, expandedKey[i]);
-		
+		AddRoundKey(encMessage, expandedKey[i]);	
 	}
-
-	PrintBlockHex(encMessage);
-	getchar();
-
-	// Prevent the program from exiting
-	//int variable = 0;
-	//std::cin >> variable;
 }
 
 void AESKeyExpansion(uint8_t key[4][4], uint8_t expandedKey[11][4][4])
