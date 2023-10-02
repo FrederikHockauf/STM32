@@ -14,7 +14,8 @@ if len(sys.argv) < 2:
 dev = serial.Serial(sys.argv[1], 115200)
 
 # run ten tests
-for i in range(10):
+# for i in range(10):
+while True:
   print("---| Begin loop |---\n")
   x = dev.readline()
   print("Flag 1")
