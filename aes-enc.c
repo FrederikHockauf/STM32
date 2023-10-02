@@ -49,6 +49,7 @@ const uint8_t sBox[256] =
 
 int main()
 {
+    // Setup the board and turn on the lights (I think)
 	hal_setup();
     hal_led_on();
 
@@ -59,16 +60,6 @@ int main()
 	uint8_t expandedKey[11][4][4];
 
     // Read the data from the computer
-    for (int i = 1; i <= 10000; i++)
-    {
-        if (i % 1000 < 500)
-            hal_led_on();
-        else
-            hal_led_off();
-        printf("Hello world from the program");
-    }
-    
-
     ReadBlock(key);
     ReadBlock(message);
 
@@ -88,6 +79,8 @@ int main()
 		AddRoundKey(encMessage, expandedKey[i]);	
 	}
 
+    // Read the data from the computer
+    WriteBlock(key);
     hal_led_off();
 
     while (1)

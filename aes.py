@@ -14,14 +14,7 @@ if len(sys.argv) < 2:
 dev = serial.Serial(sys.argv[1], 115200)
 
 # run ten tests
-# for i in range(10):
-while True:
-  print("---| Begin loop |---\n")
-  x = dev.readline()
-  print("Flag 1")
-  print(x.decode())
-
-
+for i in range(10):
   # generate random 128 bit key and random 128 bit data block
   key = bytes(random.getrandbits(8) for _ in range(16))
   data = bytes(random.getrandbits(8) for _ in range(16))
@@ -43,6 +36,4 @@ while True:
     if ciphertext_dev[i] != ciphertext_rev[i]:
       print("Error in encryption!\n")
       sys.exit(-1)
-  
-  print("---| End loop |---\n")
  
