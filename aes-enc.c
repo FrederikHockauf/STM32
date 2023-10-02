@@ -5,7 +5,11 @@
 // The number of AES rounds to be performed. Does not actually support 12 or 14 rounds currently
 const int ROUNDS = 10;
 
-// Declare the functions related to the functions (mostly) related to key expansion
+// Declare fucntions related to reading and writing data to and from the computer
+void ReadBlock(uint8_t block[4][4]);
+void WriteBlock(uint8_t block[4][4]);
+
+// Declare functions related to the functions (mostly) related to key expansion
 void AESKeyExpansion(uint8_t key[4][4], uint8_t expandedKey[11][4][4]);
 void FillRCon(uint8_t rCon[10][4]);
 void BytewiseXOR(uint8_t operand1[4], uint8_t operand2[4], uint8_t result[4]);
@@ -44,10 +48,14 @@ const uint8_t sBox[256] =
 int main()
 {
 	// Declare and initialize the messge, encrypted message (that we'll transform), the key, and the expanded key
-	uint8_t message[4][4] = { { 0xce, 0x55, 0x28, 0xdf }, { 0x43, 0x4d, 0x33, 0x85 }, { 0x63, 0x7c, 0x77, 0x7b }, { 0xb0, 0x54, 0xbb, 0x16 } };
+	uint8_t message[4][4];
 	uint8_t encMessage[4][4];
-	uint8_t key[4][4] = { { 0x45, 0xf9, 0x02, 0x7f }, { 0x1c, 0xa6, 0xb4, 0xc6 }, { 0x9b, 0x1e, 0x87, 0xe9 }, { 0xfa, 0x59, 0x47, 0xf0 } };
+	uint8_t key[4][4];
 	uint8_t expandedKey[11][4][4];
+
+    // Read the data from the computer
+    ReadBlock(key);
+    ReadBlock(message);
 
 	// Prepare for the round operations by expanding the key, readying the encryption message, and adding the 0th round key
 	AESKeyExpansion(key, expandedKey);
@@ -64,6 +72,23 @@ int main()
 			MixColumns(encMessage);
 		AddRoundKey(encMessage, expandedKey[i]);	
 	}
+}
+
+
+void ReadBlock(uint8_t block[4][4])
+{
+    // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
+	for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
+            block[i][j] = 0 << 8 | hal_getchar();
+}
+
+void WriteBlock(uint8_t block[4][4])
+{
+    // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
+	for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
+            hal_putchar((block[i][j] >> ((3 - i) * 8)) & 0xff);
 }
 
 void AESKeyExpansion(uint8_t key[4][4], uint8_t expandedKey[11][4][4])
