@@ -4,6 +4,13 @@
 #include <string.h>
 //#include <stdio.h>
 
+extern const char _elf_name[];
+
+#ifdef STM32F4  // assembler demo only for the target device
+int test_asm(int);
+extern int somedata; // = 0x12345678;
+#endif
+
 // The number of AES rounds to be performed. Does not actually support 12 or 14 rounds currently
 const int ROUNDS = 10;
 
@@ -50,7 +57,6 @@ const uint8_t sBox[256] =
 int main()
 {
 	hal_setup();
-	hal_led_off();
 
 	// Declare and initialize the messge, encrypted message (that we'll transform), the key, and the expanded key
 	uint8_t message[4][4];
@@ -60,7 +66,8 @@ int main()
 
     // Read the data from the computer
     printf("Hello world from the program");
-    
+    hal_led_on();
+
     ReadBlock(key);
     ReadBlock(message);
 
