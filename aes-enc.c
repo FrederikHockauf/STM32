@@ -49,6 +49,9 @@ const uint8_t sBox[256] =
 
 int main()
 {
+	hal_setup();
+	hal_led_on();
+
 	// Declare and initialize the messge, encrypted message (that we'll transform), the key, and the expanded key
 	uint8_t message[4][4];
 	uint8_t encMessage[4][4];
@@ -76,6 +79,10 @@ int main()
 			MixColumns(encMessage);
 		AddRoundKey(encMessage, expandedKey[i]);	
 	}
+
+    hal_led_off();
+    
+    return 0;
 }
 
 
