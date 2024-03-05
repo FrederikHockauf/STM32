@@ -43,6 +43,8 @@ int main(void)
     int opcode = 0;
     opcode = opcode << 8 | hal_getchar();
 
+    printf("The opcode is = \"%s\"!\n", opcode);
+
     // Initialize the two operands
     int operand_a = get_4bytes();
     int operand_b = -1;

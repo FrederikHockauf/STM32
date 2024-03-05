@@ -11,9 +11,17 @@ dev = serial.Serial(sys.argv[1], 115200)
 while True:
   print("---| Begin loop |---")
   x = dev.readline()
-  print("Flag 1")
-  print(x.decode())
-  print("Flag 2.1")
+  print("Flag 1 - Read something")
+  print(x.decode()) # 
+  print("Flag 2 - We've printed it")
+
+  opcode = 5
+  opcode_data = opcode.to_bytes(1,'big')
+  dev.write(data)
+  y = dev.readline()
+  print("Flag 3 - Read something")
+  print(y.decode()) # 
+  print("Flag 4 - We've printed it")
 
   v = 16975083
   print("Flag 3")
