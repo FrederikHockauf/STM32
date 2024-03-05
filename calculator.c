@@ -37,6 +37,7 @@ int main(void)
 
   for (int rounds = 0; rounds < 10; rounds++)
   {
+    printf("Hello world from the biggest and bestest \"%s\"!\n", _elf_name);
 
     // Initialize the opcode and retrieve it from the computer
     int opcode = 0;
@@ -53,7 +54,7 @@ int main(void)
     uint64_t t_start;
     uint64_t t_stop;
 
-    printf("Hello world from the biggest and bestest \"%s\"!\n", _elf_name);
+    
 
     switch (opcode)
     {
