@@ -15,19 +15,19 @@ include config.mk
 # additional dependencies for your the target TARGETNAME.elf file (just
 # define the dependencies, a generic rule for .elf target exists in
 # config.mk).
-AES_SRC = aes-enc.c
+CALCULATOR_SRC = calculator.c
 
 ifeq ($(TARGET),stm32f4)
-  AES_SRC += demo.S # <-------------------- Change this away from the demo
+  CALCULATOR_SRC += demo.S # <-------------------- Change this away from the demo
 endif
 
-AES_OBJ = $(call objs,$(AES_SRC))
+CALCULTATOR_OBJ = $(call objs,$(CALCULATOR_SRC))
 
-demo.elf: $(AES_OBJ) libhal.a
+demo.elf: $(CALCULTATOR_OBJ) libhal.a
 
 
 # Don't forget to add all objects to the OBJ variable
-OBJ += $(AES_OBJ) # <-------------------- Check this works
+OBJ += $(CALCULTATOR_OBJ) # <-------------------- Check this works
 
 # Include generated dependencies
 -include $(filter %.d,$(OBJ:.o=.d))
