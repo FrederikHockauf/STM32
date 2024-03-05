@@ -99,7 +99,7 @@ int main(void)
     }
 
     // Send back the opcode (again?)
-    hal_putchar(opcode 0xff);
+    hal_putchar(0xff); // used to be => opcode 0xff
     // Change has been made
   }
 
