@@ -17,7 +17,7 @@ while True:
 
   opcode = 5
   opcode_data = opcode.to_bytes(1,'big')
-  dev.write(data)
+  dev.write(opcode_data)
   y = dev.readline()
   print("Flag 3 - Read something")
   print(y.decode()) # 
