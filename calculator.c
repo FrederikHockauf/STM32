@@ -37,6 +37,7 @@ int main(void)
 
   for (int rounds = 0; rounds < 10; rounds++)
   {
+
     // Initialize the opcode and retrieve it from the computer
     int opcode = 0;
     opcode = opcode << 8 | hal_getchar();
@@ -51,6 +52,8 @@ int main(void)
     // Get time variables
     uint64_t t_start;
     uint64_t t_stop;
+
+    printf("Hello world from the biggest and bestest \"%s\"!\n", _elf_name);
 
     switch (opcode)
     {
