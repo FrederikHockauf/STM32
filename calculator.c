@@ -75,22 +75,6 @@ int main(void)
         operand_b = get_4bytes();
         t_start = hal_get_time();
         res = operand_a * operand_b;
-        res = operand_a * operand_b;
-        res = operand_a * operand_b;
-        res = operand_a * operand_b;
-        res = operand_a * operand_b;
-        res = operand_a * operand_b;
-        res = operand_a * operand_b;
-        res = operand_a * operand_b;
-        res = operand_a * operand_b;
-        res = operand_a * operand_b;
-        res = operand_a * operand_b;
-        res = operand_a * operand_b;
-        res = operand_a * operand_b;
-        res = operand_a * operand_b;
-        res = operand_a * operand_b;
-        res = operand_a * operand_b;
-        res = operand_a * operand_b;
         t_stop = hal_get_time();
         break;
       case 2:

@@ -22,6 +22,7 @@ single_operand = ["INC"]
 
 
 for i in range(10):
+  print("\n\n----")
   opc = random.choice([0,1,2,3])
 
   print(opcodes[opc], end =" ")
@@ -59,9 +60,13 @@ for i in range(10):
     ret = int.from_bytes(dev.read(1), 'big')
   
     if opcodes[ret] == "TME":
-      res = int.from_bytes(dev.read(4), 'big')
+      res2 = int.from_bytes(dev.read(4), 'big')
     
-      print("  time:", res)
+      print("  time:", res2)
+      print(f"a = {a}")
+      print(f"a = {b}")
+      print(f"result = {res2}")
+
     else:
       print("ERROR!\n")
   else:
