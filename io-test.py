@@ -68,6 +68,8 @@ for i in range(10):
       print("ERROR!\n")
   else:
     print("ERROR!\n")
+    
+  print("loop over")
 
 dev.close()
   
