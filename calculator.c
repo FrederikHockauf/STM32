@@ -84,13 +84,13 @@ int main(void)
     }
 
     // Send back the opcode and result
-    hal_putchar(0b100); // used to be => opcode 0xff
-    set_4bytes(0b111);
+    hal_putchar(res_opcode); // used to be => opcode 0xff
+    set_4bytes(res);
 
     // Send back the opcode and result
     int time = t_stop-t_start;
     hal_putchar(0b101); // used to be => opcode 0xff
-    set_4bytes(0b110);
+    set_4bytes(time);
   }
 
 
