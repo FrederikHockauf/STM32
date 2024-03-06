@@ -91,7 +91,7 @@ int main(void)
 
     // Send back the opcode and result
     int time = t_stop-t_start;
-    hal_putchar(5); // used to be => opcode 0xff
+    hal_putchar(5 & 0xff); // used to be => opcode 0xff
     set_4bytes(time);
 
 
