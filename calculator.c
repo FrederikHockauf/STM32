@@ -62,7 +62,7 @@ int main(void)
     else if (opcode == 6)
       printf("code is 6");
     else
-      printf("none o' dese")
+      printf("none o' dese");
     //printf(opcode);
     //printf("The opcode is = \"%s\"!\n", opcode);
 
