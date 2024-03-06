@@ -41,7 +41,7 @@ int main(void)
 
     hal_led_off();
 
-    printf("Hello world from");
+    printf("Hello world from - Something wrong?");
 
     // Initialize the opcode and retrieve it from the computer
     int opcode = 0;
