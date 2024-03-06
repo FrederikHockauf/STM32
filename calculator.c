@@ -46,6 +46,7 @@ int main(void)
     opcode = opcode << 8 | hal_getchar();
 
     hal_led_on();
+    printf("damn");
 
     if (opcode == 0)
       printf("code is 0");
@@ -63,6 +64,7 @@ int main(void)
       printf("code is 6");
     else
       printf("none o' dese");
+    
     //printf(opcode);
     //printf("The opcode is = \"%s\"!\n", opcode);
 
