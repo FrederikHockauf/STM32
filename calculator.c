@@ -37,7 +37,8 @@ int main(void)
 
   for (int rounds = 0; rounds < 10; rounds++)
   {
-    printf("Hello world from the biggest and bestest \"%s\"!\n", _elf_name);
+    //printf("Hello world from the biggest and bestest \"%s\"!\n", _elf_name);
+    printf("wrong?");
 
     hal_led_off();
 
