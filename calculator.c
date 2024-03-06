@@ -43,9 +43,9 @@ int main(void)
 
     // Initialize the opcode and retrieve it from the computer
     int opcode = 0;
-    opcode = opcode << 8 | hal_getchar();
+    //opcode = opcode << 8 | hal_getchar();
 
-    hal_led_on();
+    //hal_led_on();
     printf("damn");
 
     if (opcode == 0)
