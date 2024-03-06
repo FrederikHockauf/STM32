@@ -45,7 +45,21 @@ int main(void)
     int opcode = 0;
     opcode = opcode << 8 | hal_getchar();
 
-    printf(opcode);
+    if (opcode == 0)
+      printf("code is 0");
+    else if (opcode == 1)
+      printf("code is 1");
+    else if (opcode == 2)
+      printf("code is 2");
+    else if (opcode == 3)
+      printf("code is 3");
+    else if (opcode == 4)
+      printf("code is 4");
+    else if (opcode == 5)
+      printf("code is 5");
+    else if (opcode == 6)
+      printf("code is 6");
+    //printf(opcode);
     //printf("The opcode is = \"%s\"!\n", opcode);
 
     // Initialize the two operands

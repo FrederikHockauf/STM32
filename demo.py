@@ -33,6 +33,7 @@ while True:
 
   opc = random.choice([0,1,2,3])
   print(opcodes[opc], end =" ")
+  print("printed opcodes")
   dev.write(opc.to_bytes(1, 'big'))
   y = dev.readline()
   print("Flag 3 - Read something")
