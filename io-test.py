@@ -40,8 +40,6 @@ for i in range(10):
     dev.write(b.to_bytes(4, 'big'))
 
   ret = int.from_bytes(dev.read(1), 'big')
-  print("hey")
-  print(f"ret is {ret}")
 
   if opcodes[ret] != "ERR":
     res = int.from_bytes(dev.read(4), 'big')
@@ -68,8 +66,6 @@ for i in range(10):
       print("ERROR!\n")
   else:
     print("ERROR!\n")
-    
-  print("loop over")
 
 dev.close()
   
