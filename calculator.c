@@ -1,6 +1,5 @@
 #include <hal.h>
 #include <stdio.h>
-#include <math.h>
 
 
 extern const char _elf_name[];
@@ -24,6 +23,16 @@ void set_4bytes(int variable)
 {
   for (int i = 0; i < 4; i++)
       hal_putchar((variable >> ((3-i)*8)) & 0xff);
+}
+
+int power(int x,int n)
+{
+    int number = 1;
+
+    for (int i = 0; i < n; ++i)
+        number *= x;
+
+    return number;
 }
 
 
@@ -70,7 +79,7 @@ int main(void)
       case 2:
         operand_b = get_4bytes();
         t_start = hal_get_time();
-        res = (int) pow(operand_a, operand_b);
+        res = power(operand_a, operand_b);
         t_stop = hal_get_time();
         break;
       case 3:
