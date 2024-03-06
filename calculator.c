@@ -86,7 +86,7 @@ int main(void)
     }
 
     // Send back the opcode and result
-    hal_putchar(res_opcode); // used to be => opcode 0xff
+    hal_putchar(3); // used to be => opcode 0xff
     set_4bytes(res);
 
     // Send back the opcode and result
