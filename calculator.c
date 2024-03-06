@@ -39,6 +39,8 @@ int main(void)
   {
     printf("Hello world from the biggest and bestest \"%s\"!\n", _elf_name);
 
+    hal_led_off();
+
     // Initialize the opcode and retrieve it from the computer
     int opcode = 0;
     opcode = opcode << 8 | hal_getchar();
