@@ -86,12 +86,16 @@ int main(void)
     }
 
     // Send back the opcode and result
-    hal_putchar(3); // used to be => opcode 0xff
+    for (int i = 0; i < 1; i++)
+      hal_putchar((res_opcode >> ((0-i)*8)) & 0xff);
+    //hal_putchar(3); // used to be => opcode 0xff
     set_4bytes(res);
 
     // Send back the opcode and result
     int time = t_stop-t_start;
-    hal_putchar(4 & 0xff); // used to be => opcode 0xff
+    for (int i = 0; i < 1; i++)
+      hal_putchar((0x4 >> ((0-i)*8)) & 0xff);
+    //hal_putchar(4 & 0xff); // used to be => opcode 0xff
     set_4bytes(time);
 
 
