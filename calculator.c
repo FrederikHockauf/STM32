@@ -25,14 +25,15 @@ void set_4bytes(int variable)
       hal_putchar((variable >> ((3-i)*8)) & 0xff);
 }
 
-int power(int x,int n)
+int power(int x, int n)
 {
-    int number = 1;
+  int i;
+  int number = 1;
 
-    for (int i = 0; i < n; ++i)
-        number *= x;
+  for (i = 0; i < n; ++i)
+    number *= x;
 
-    return number;
+  return number;
 }
 
 
@@ -73,6 +74,22 @@ int main(void)
       case 1:
         operand_b = get_4bytes();
         t_start = hal_get_time();
+        res = operand_a * operand_b;
+        res = operand_a * operand_b;
+        res = operand_a * operand_b;
+        res = operand_a * operand_b;
+        res = operand_a * operand_b;
+        res = operand_a * operand_b;
+        res = operand_a * operand_b;
+        res = operand_a * operand_b;
+        res = operand_a * operand_b;
+        res = operand_a * operand_b;
+        res = operand_a * operand_b;
+        res = operand_a * operand_b;
+        res = operand_a * operand_b;
+        res = operand_a * operand_b;
+        res = operand_a * operand_b;
+        res = operand_a * operand_b;
         res = operand_a * operand_b;
         t_stop = hal_get_time();
         break;
