@@ -1,5 +1,6 @@
 #include <hal.h>
 #include <stdio.h>
+#include <math.h>
 
 
 extern const char _elf_name[];
@@ -57,27 +58,23 @@ int main(void)
       case 0:
         operand_b = get_4bytes();
         t_start = hal_get_time();
-        //printf("This is addition with %i\n", operand_a);
         res = operand_a + operand_b;
         t_stop = hal_get_time();
         break;
       case 1:
         operand_b = get_4bytes();
         t_start = hal_get_time();
-        //printf("This is multiplication with %i\n", operand_a);
         res = operand_a * operand_b;
         t_stop = hal_get_time();
         break;
       case 2:
         operand_b = get_4bytes();
         t_start = hal_get_time();
-        //printf("This is exponentiation with %i\n", operand_a);
-        res = operand_a ^ operand_b;
+        res = (int) pow(operand_a, operand_b);
         t_stop = hal_get_time();
         break;
       case 3:
         t_start = hal_get_time();
-        //printf("This is incrementation with %i\n", operand_a);
         res = operand_a += 1;
         t_stop = hal_get_time();
         break;
