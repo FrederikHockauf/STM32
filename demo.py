@@ -24,6 +24,7 @@ single_operand = ["INC"]
 
 while True:
   print("---| Begin loop |---")
+  print("More text to check")
   x = dev.readline()
   print("Flag 1 - Read something")
   print(x.decode()) # 
