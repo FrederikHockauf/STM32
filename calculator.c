@@ -37,36 +37,33 @@ int main(void)
 
   for (int rounds = 0; rounds < 10; rounds++)
   {
-    //printf("Hello world from the biggest and bestest \"%s\"!\n", _elf_name);
-    printf("wrong?\n", _elf_name);
+    printf("Hello world from the biggest and bestest \"%s\"!\n", _elf_name);
 
     hal_led_off();
 
-    printf("Hello world from - Something wrong?");
-
     // Initialize the opcode and retrieve it from the computer
     int opcode = 0;
-    //opcode = opcode << 8 | hal_getchar();
+    opcode = opcode << 8 | hal_getchar();
 
     //hal_led_on();
     printf("damn");
 
     if (opcode == 0)
-      printf("code is 0");
+      printf("code is 0\n");
     else if (opcode == 1)
-      printf("code is 1");
+      printf("code is 1\n");
     else if (opcode == 2)
-      printf("code is 2");
+      printf("code is 2\n");
     else if (opcode == 3)
-      printf("code is 3");
+      printf("code is 3\n");
     else if (opcode == 4)
-      printf("code is 4");
+      printf("code is 4\n");
     else if (opcode == 5)
-      printf("code is 5");
+      printf("code is 5\n");
     else if (opcode == 6)
-      printf("code is 6");
+      printf("code is 6\n");
     else
-      printf("none o' dese");
+      printf("none o' dese\n");
     
     //printf(opcode);
     //printf("The opcode is = \"%s\"!\n", opcode);

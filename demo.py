@@ -30,15 +30,11 @@ while True:
   print(x.decode()) # 
   print("Flag 2 - We've printed it")
 
-  x = dev.readline()
-  print("Flag 1 - Read something")
-  print(x.decode()) # 
-  print("Flag 2 - We've printed it")
-
-  #opc = random.choice([0,1,2,3])
-  #print(opcodes[opc], end =" ")
-  #print("printed opcodes")
-  #dev.write(opc.to_bytes(1, 'big'))
+  opc = random.choice([0,1,2,3])
+  print(opcodes[opc], end =" ")
+  print("printed opcodes")
+  dev.write(opc.to_bytes(1, 'big'))
+  
   y = dev.readline()
   print("Flag 3 - Read something")
   print(y.decode()) # 
