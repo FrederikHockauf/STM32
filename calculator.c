@@ -67,11 +67,14 @@ int main(void)
     // Initialize the two operands
     int operand_a = get_4bytes();
     int operand_b = get_4bytes();
+    int c = operand_a + operand_b;
 
     printf("got 'em boss\n");
 
+
     // Send back the opcode
-    hal_putchar(opcode >> 8*3 & 0xff);
+    for (int i = 3; i >= 0; i--)
+      hal_putchar((c >> i*8) & 0xff);
 
     // Get time variables
     uint64_t t_start;

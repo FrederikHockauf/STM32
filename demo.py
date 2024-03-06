@@ -52,6 +52,8 @@ while True:
   print(y.decode()) # 
   print("Flag 7 - We've printed it")
 
+  please = int.from_bytes(dev.read(4), 'big')
+  print(f"Flag 8 - Result is {please}")
 
 
 
