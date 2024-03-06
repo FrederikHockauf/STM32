@@ -45,8 +45,7 @@ int main(void)
     int opcode = 0;
     opcode = opcode << 8 | hal_getchar();
 
-    //hal_led_on();
-    printf("damn");
+    hal_led_on();
 
     if (opcode == 0)
       printf("code is 0\n");
@@ -64,13 +63,12 @@ int main(void)
       printf("code is 6\n");
     else
       printf("none o' dese\n");
-    
-    //printf(opcode);
-    //printf("The opcode is = \"%s\"!\n", opcode);
 
     // Initialize the two operands
     int operand_a = get_4bytes();
-    int operand_b = -1;
+    int operand_b = get_4bytes();
+
+    printf("got 'em boss\n");
 
     // Send back the opcode
     hal_putchar(opcode >> 8*3 & 0xff);

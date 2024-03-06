@@ -34,11 +34,29 @@ while True:
   print(opcodes[opc], end =" ")
   print("printed opcodes")
   dev.write(opc.to_bytes(1, 'big'))
-  
+
   y = dev.readline()
   print("Flag 3 - Read something")
   print(y.decode()) # 
   print("Flag 4 - We've printed it")
+
+
+  operandA = 7
+  operandB = 3
+  dev.write(operandA.to_bytes(4, 'big'))
+  dev.write(operandB.to_bytes(4, 'big'))
+  print("Flag 5 - Sent operands")
+
+  y = dev.readline()
+  print("Flag 6 - Read something")
+  print(y.decode()) # 
+  print("Flag 7 - We've printed it")
+
+
+
+
+
+
 
   v = 16975083
   print("Flag 3")
