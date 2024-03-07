@@ -40,7 +40,7 @@ for i in range(10):
   print(f"[display] key = {key}")
   print(f"[display] data = {data}")
 
-  dev.write(thinke)
+  dev.write(inte)
 
   x = dev.readline()
   print("Flag 4 - Read something")
