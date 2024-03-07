@@ -28,6 +28,9 @@ for i in range(10):
   data = bytes(random.getrandbits(8) for _ in range(16))
 
   thinke = bytes(random.getrandbits(8) for _ in range(1))
+  thinke2 = bytes(random.getrandbits(8) for _ in range(2))
+  thinke3 = bytes(random.getrandbits(8) for _ in range(3))
+  thinke4 = bytes(random.getrandbits(8) for _ in range(4))
 
   print("Flag 3 - writing data")
   # send key and data to device
@@ -42,8 +45,9 @@ for i in range(10):
   print(f"[display] inte = {inte}")
   print(f"[display - b] inte = {bin(inte)}")
   print(f"[display - n] thinke = {thinke}")
-  #print(f"[display - i] thinke = {int(thinke)}")
-  print(f"[display - b] thinke = {bin(thinke)}")
+  print(f"[display - n] thinke2 = {thinke2}")
+  print(f"[display - n] thinke3 = {thinke3}")
+  print(f"[display - n] thinke4 = {thinke4}")
 
   dev.write(inte)
 
