@@ -27,10 +27,12 @@ for i in range(10):
   key = bytes(random.getrandbits(8) for _ in range(16))
   data = bytes(random.getrandbits(8) for _ in range(16))
 
+  thinke = bytes(random.getrandbits(8) for _ in range(1))
+
   print("Flag 3 - writing data")
   # send key and data to device
   inte = 16
-  dev.write(inte)
+  dev.write(thinke)
 
   x = dev.readline()
   print("Flag 4 - Read something")
