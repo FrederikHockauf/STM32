@@ -39,6 +39,11 @@ for i in range(10):
   print(f"data = {sys. getsizeof(data)}")
   print(f"[display] key = {key}")
   print(f"[display] data = {data}")
+  print(f"[display] inte = {inte}")
+  print(f"[display - b] inte = {bin(inte)}")
+  print(f"[display - n] thinke = {thinke}")
+  print(f"[display - i] thinke = {int(thinke)}")
+  print(f"[display - b] thinke = {bin(thinke)}")
 
   dev.write(inte)
 
