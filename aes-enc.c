@@ -8,6 +8,8 @@
 const int ROUNDS = 10;
 
 // Declare fucntions related to reading and writing data to and from the computer
+uint8_t Read4Bytes();
+void Write4Bytes(uint8_t variable);
 void ReadBlock(uint8_t block[4][4]);
 void WriteBlock(uint8_t block[4][4]);
 
@@ -88,13 +90,28 @@ int main()
     return 0;
 }
 
+uint8_t Read4Bytes()
+{
+  uint8_t variable = 0;
+
+  for (int i = 0; i < 4; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
+      variable = variable << 8 | hal_getchar();
+  
+  return variable;
+}
+
+void Write4Bytes(uint8_t variable)
+{
+  for (int i = 0; i < 4; i++)
+      hal_putchar((variable >> ((3-i)*8)) & 0xff);
+}
 
 void ReadBlock(uint8_t block[4][4])
 {
     // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
 	for (int i = 0; i < 4; i++)
         for (int j = 0; j < 4; j++)
-            block[i][j] = 0 << 8 | hal_getchar();
+            block[i][j] = Read4Bytes();
 }
 
 void WriteBlock(uint8_t block[4][4])
@@ -102,7 +119,7 @@ void WriteBlock(uint8_t block[4][4])
     // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
 	for (int i = 0; i < 4; i++)
         for (int j = 0; j < 4; j++)
-            hal_putchar((block[i][j] >> ((3 - i) * 8)) & 0xff);
+			Write4Bytes(block[i][j]);
 }
 
 void AESKeyExpansion(uint8_t key[4][4], uint8_t expandedKey[11][4][4])

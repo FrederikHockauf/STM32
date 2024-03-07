@@ -13,18 +13,24 @@ if len(sys.argv) < 2:
 
 dev = serial.Serial(sys.argv[1], 115200)
 
+print("started the encryption thing")
+
 # run ten tests
 for i in range(10):
   # generate random 128 bit key and random 128 bit data block
   key = bytes(random.getrandbits(8) for _ in range(16))
   data = bytes(random.getrandbits(8) for _ in range(16))
 
+  print("Flag 1 - writing data")
   # send key and data to device
   dev.write(key)
   dev.write(data)
+  print("Flag 2 - done writing data")
+  print("Flag 3 - reading data")
 
   # read cipher text from device
   ciphertext_dev = dev.read(16)
+  print("Flag 4 - done reading data")
 
   # generate reference cipher block
   cipher = AES.new(key, AES.MODE_ECB)
