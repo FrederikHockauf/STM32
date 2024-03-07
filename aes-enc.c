@@ -65,6 +65,9 @@ int main()
     ReadBlock(key);
     ReadBlock(message);
 
+	printf("From device - Done readingn\n");
+	hal_led_off();
+
 	// Prepare for the round operations by expanding the key, readying the encryption message, and adding the 0th round key
 	AESKeyExpansion(key, expandedKey);
 	memcpy(encMessage, message, sizeof(encMessage));

@@ -26,6 +26,14 @@ for i in range(10):
   dev.write(key)
   dev.write(data)
   print("Flag 2 - done writing data")
+
+
+  x = dev.readline()
+  print("Flag 1 - Read something")
+  print(x.decode()) # 
+  print("Flag 2 - We've printed it")
+
+
   print("Flag 3 - reading data")
 
   # read cipher text from device
