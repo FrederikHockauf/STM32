@@ -63,6 +63,10 @@ int main()
 
 	printf("From device - This works?\n");
 
+	uint8_t alle = Read4Bytes();
+
+	printf("From device - Another check\n");
+
     // Read the data from the computer
     ReadBlock(key);
     ReadBlock(message);

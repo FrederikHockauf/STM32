@@ -27,24 +27,34 @@ for i in range(10):
   key = bytes(random.getrandbits(8) for _ in range(16))
   data = bytes(random.getrandbits(8) for _ in range(16))
 
-  print("Flag 1 - writing data")
+  print("Flag 3 - writing data")
   # send key and data to device
+  inte = 16
+  dev.write(inte)
+
+  x = dev.readline()
+  print("Flag 4 - Read something")
+  print(x.decode()) # 
+  print("Flag 5 - We've printed it")
+
+
+
   dev.write(key)
   dev.write(data)
-  print("Flag 2 - done writing data")
+  print("Flag 6 - done writing data")
 
 
   x = dev.readline()
-  print("Flag 1 - Read something")
+  print("Flag 7 - Read something")
   print(x.decode()) # 
-  print("Flag 2 - We've printed it")
+  print("Flag 8 - We've printed it")
 
 
-  print("Flag 3 - reading data")
+  print("Flag 9 - reading data")
 
   # read cipher text from device
   ciphertext_dev = dev.read(16)
-  print("Flag 4 - done reading data")
+  print("Flag 10 - done reading data")
 
   # generate reference cipher block
   cipher = AES.new(key, AES.MODE_ECB)
