@@ -37,6 +37,8 @@ for i in range(10):
   print(f"thinke = {sys. getsizeof(thinke)}")
   print(f"key = {sys. getsizeof(key)}")
   print(f"data = {sys. getsizeof(data)}")
+  print(f"[display] key = {key}")
+  print(f"[display] data = {data}")
 
   dev.write(thinke)
 
