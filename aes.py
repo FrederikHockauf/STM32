@@ -32,6 +32,10 @@ for i in range(10):
   print("Flag 3 - writing data")
   # send key and data to device
   inte = 16
+
+  print(f"inte = {sys. getsizeof(inte)}")
+  print(f"thinke = {sys. getsizeof(thinke)}")
+
   dev.write(thinke)
 
   x = dev.readline()
