@@ -49,7 +49,7 @@ for i in range(10):
   print(f"[display - n] thinke3 = {thinke3}")
   print(f"[display - n] thinke4 = {thinke4}")
 
-  dev.write(inte)
+  dev.write(thinke)
 
   x = dev.readline()
   print("Flag 4 - Read something")
