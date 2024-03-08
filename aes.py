@@ -40,10 +40,6 @@ for i in range(10):
   print(x.decode()) # 
   print("Flag 6 - We've printed it")
 
-  sent_key = dev.read(16)
-  sent_message = dev.read(16)
-  print("Flag 7 - got data back")
-
   # read cipher text from device
   ciphertext_dev = dev.read(16)
 
