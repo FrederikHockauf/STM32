@@ -3,10 +3,10 @@
 #include <stdint.h>
 #include <string.h>
 
-typedef struct { int32_t a[10]; } int256;
+typedef struct { int32_t a[11]; } int256;
 const uint16_t TOTAL_BITS = 256;
 const uint8_t INT_BITS = 31; // Sign takes one bit
-const uint8_t RADIX = 23;
+const uint8_t RADIX = 24;
 
 int256 Karatsuba(int256 a, int256 b, int bits);
 int256 MPAAdd(int256 operand1, int256 operand2);
@@ -18,20 +18,20 @@ int256 MPAAbsoluteValue(int256 number);
 int256 ReducedRepresentation(int256 number);
 int256 Zero();
 
-int Read4Bytes()
+int ReadBytes(int bytes)
 {
   int variable = 0;
 
-  for (int i = 0; i < 4; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
+  for (int i = 0; i < bytes; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
       variable = variable << 8 | hal_getchar();
   
   return variable;
 }
 
-void Write4Bytes(int variable)
+void WriteBytes(int variable, int bytes)
 {
-  for (int i = 0; i < 4; i++)
-      hal_putchar((variable >> ((3-i)*8)) & 0xff);
+  for (int i = 0; i < bytes; i++)
+      hal_putchar((variable >> (((bytes-1)-i)*8)) & 0xff);
 }
 
 
@@ -52,21 +52,19 @@ int main()
         int256 numA = Zero();
         int256 numB = Zero();
 
-        numA.a[7] = Read4Bytes();
-        numA.a[6] = Read4Bytes();
-        numA.a[5] = Read4Bytes();
-        numA.a[4] = Read4Bytes();
-        numA.a[3] = Read4Bytes();
-        numA.a[2] = Read4Bytes();
-        numA.a[1] = Read4Bytes();
-        numA.a[0] = Read4Bytes();
+        numA.a[10] = ReadBytes(2);
+        numA.a[9] = ReadBytes(3);
+        numA.a[8] = ReadBytes(3);
+        numA.a[7] = ReadBytes(3);
+        numA.a[6] = ReadBytes(3);
+        numA.a[5] = ReadBytes(3);
+        numA.a[4] = ReadBytes(3);
+        numA.a[3] = ReadBytes(3);
+        numA.a[2] = ReadBytes(3);
+        numA.a[1] = ReadBytes(3);
+        numA.a[0] = ReadBytes(3);
 
-        printf("done loading - %u and %u and %u and %u and %u and %u and %u and %u\n", numA.a[7], numA.a[6], numA.a[5], numA.a[4], numA.a[3], numA.a[2], numA.a[1], numA.a[0]);
-
-        numA = ReducedRepresentation(numA);
-
-        printf("reduced representation - %u and %u and %u and %u and %u and %u and %u and %u and %u and %u\n", numA.a[9], numA.a[8], numA.a[7], numA.a[6], numA.a[5], numA.a[4], numA.a[3], numA.a[2], numA.a[1], numA.a[0]);
-
+        printf("done loading - %u and %u and %u and %u and %u and %u and %u and %u and %u and %u and %u\n", numA.a[10], numA.a[9], numA.a[8], numA.a[7], numA.a[6], numA.a[5], numA.a[4], numA.a[3], numA.a[2], numA.a[1], numA.a[0]);
 
         // Edit limbs to create non-zero numbers
         //numA.a[0] = 0b11000000000000000000000000;
