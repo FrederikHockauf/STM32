@@ -64,7 +64,7 @@ int main()
 	printf("From device - This works?\n");
 	
 	uint8_t a = Read4Bytes;
-	printf("a = \"%s\"\n", (int) a);
+	printf("a = \"%s\"\n", (char) a);
 	//uint8_t alle = Read4Bytes();
 	//uint8_t alle2 = Read4Bytes();
 
