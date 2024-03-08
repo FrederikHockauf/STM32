@@ -71,11 +71,13 @@ for i in range(10):
       print("Flag  9 - MUL")
       print((a*b) == res, end =" ")
 
-
+    print("Flag  10 - Done with calcs")
     ret = int.from_bytes(dev.read(1), 'big')
+    print("Flag  11 - Got muh code")
   
     if opcodes[ret] == "TME":
       res = int.from_bytes(dev.read(4), 'big')
+      print("Flag  12 - Got muh time as well")
     
       print("  time:", res)
     else:

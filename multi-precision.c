@@ -50,10 +50,20 @@ int main()
 
         hal_putchar(opcode);
 
+        int timeStart = hal_get_time();
+        
         int256 total = MPAAdd(numA, numB);
+
+        int timeStop = hal_get_time();
+        int finalTime = timeStop - timeStart;
+
         int512 result = ToInt512(ReducedRepresentation(total));
 
         WriteInt512(result);
+
+        uint8_t timeOpcode = 5;
+        hal_putchar(timeOpcode);
+        WriteBytes(finalTime, 4);
 
         // Edit limbs to create non-zero numbers
         //numA.a[0] = 0b11000000000000000000000000;
