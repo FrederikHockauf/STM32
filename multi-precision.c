@@ -62,7 +62,7 @@ int main()
         //numB.a[2] = 0b00000000000000000000000100;
 
         // Calculate and print the product
-        int256 result = Karatsuba(numA, numB, TOTAL_BITS);
+        //int256 result = Karatsuba(numA, numB, TOTAL_BITS);
         
         
         // Write the encrypted message to the computer
