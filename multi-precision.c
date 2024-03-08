@@ -5,6 +5,7 @@
 
 typedef struct { int32_t a[11]; } int256;
 const uint16_t TOTAL_BITS = 256;
+const uint16_t TOTAL_LIMBS = 11;
 const uint8_t INT_BITS = 31; // Sign takes one bit
 const uint8_t RADIX = 24;
 
@@ -34,6 +35,17 @@ void WriteBytes(int variable, int bytes)
       hal_putchar((variable >> (((bytes-1)-i)*8)) & 0xff);
 }
 
+int256 ReadInt256()
+{
+    int256 number = Zero();
+
+    number.a[TOTAL_LIMBS - 1] = ReadBytes(2);
+    for (int limb = (TOTAL_LIMBS - 2); limb > -1; limb--)
+        number.a[limb] = ReadBytes(3);
+
+    return number;
+}
+
 
 int main()
 {
@@ -49,20 +61,8 @@ int main()
         printf("opcode = %u\n", opcode);
 
         // Initialize two operands as zero
-        int256 numA = Zero();
+        int256 numA = ReadInt256();
         int256 numB = Zero();
-
-        numA.a[10] = ReadBytes(2);
-        numA.a[9] = ReadBytes(3);
-        numA.a[8] = ReadBytes(3);
-        numA.a[7] = ReadBytes(3);
-        numA.a[6] = ReadBytes(3);
-        numA.a[5] = ReadBytes(3);
-        numA.a[4] = ReadBytes(3);
-        numA.a[3] = ReadBytes(3);
-        numA.a[2] = ReadBytes(3);
-        numA.a[1] = ReadBytes(3);
-        numA.a[0] = ReadBytes(3);
 
         printf("done loading - %u and %u and %u and %u and %u and %u and %u and %u and %u and %u and %u\n", numA.a[10], numA.a[9], numA.a[8], numA.a[7], numA.a[6], numA.a[5], numA.a[4], numA.a[3], numA.a[2], numA.a[1], numA.a[0]);
 
@@ -126,7 +126,7 @@ int256 Karatsuba(int256 a, int256 b, int bits)
 
 	// Constant time (?) comparison between medium and mediumHat to determine if it should be negated
 	int t;
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < TOTAL_LIMBS; i++)
 		if (medium.a[i] == mediumHat.a[i])
 			t += 0;
 		else
@@ -150,7 +150,7 @@ int256 MPAAdd(int256 operand1, int256 operand2)
 {
 	int256 result;
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < TOTAL_LIMBS; i++)
 		result.a[i] = operand1.a[i] + operand2.a[i];
 
 	return result;
@@ -159,7 +159,7 @@ int256 MPAAdd(int256 operand1, int256 operand2)
 int256 MPASubtraction(int256 operand1, int256 operand2)
 {
 	// Calculate operand2's negative version by finding its two's complement (negating and adding 1)
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < TOTAL_LIMBS; i++)
 		operand2.a[i] = !operand2.a[i];
 	operand2.a[0] += 1;
 
@@ -178,7 +178,7 @@ int256 MPABitshiftLeft(int256 number, int places)
 	remainingPlaces -= places;
 
 	// Just shift the bottom-most limb as we don't need to save anything
-	number.a[9] <<= places;
+	number.a[TOTAL_LIMBS - 1] <<= places;
 
 	for (int i = 8; i >= 0; i--)
 	{
@@ -209,7 +209,7 @@ int256 MPABitshiftRight(int256 number, int places)
 	// Just shift the bottom-most limb as we don't need to save anything
 	number.a[0] >>= places;
 
-	for (int i = 1; i < 10; i++)
+	for (int i = 1; i < TOTAL_LIMBS; i++)
 	{
 		// Find the portion of the i'th limb that will get deleted and save it
 		uint32_t mask = (1 << places) - 1;
@@ -231,7 +231,7 @@ int256 MPASchoolbookMultiplication(int256 operand1, int256 operand2)
 {
 	// Set the result to be the limb-wise schoolbook multiplication of the operands
 	int256 result;
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < TOTAL_LIMBS; i++)
 		result.a[i] = operand1.a[i] * operand2.a[i];
 
 	return result;
@@ -244,7 +244,7 @@ int256 MPAAbsoluteValue(int256 number)
 
 int256 ReducedRepresentation(int256 number)
 {
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < (TOTAL_LIMBS - 1); i++)
 	{
 		uint32_t carry = number.a[i] >> RADIX;
 		number.a[i + 1] += carry;
@@ -259,7 +259,7 @@ int256 Zero()
 {
 	int256 number;
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < TOTAL_LIMBS; i++)
 		number.a[i] = 0;
 
 	return number;
