@@ -26,23 +26,31 @@ int main()
 	hal_setup();
     hal_led_on();
 
-	// Initialize two operands as zero
-	int256 numA = Zero();
-	int256 numB = Zero();
+    for (int rounds = 0; rounds < 10; rounds++)
+    {
+        uint8_t opcode = hal_getchar();
+        printf("opcode = %u", opcode);
 
-	// Edit limbs to create non-zero numbers
-	numA.a[0] = 0b11000000000000000000000000;
-	numB.a[0] = 0b01000000000000000000000011;
-	numB.a[1] = 0b00000000000000000000111011;
-	numB.a[2] = 0b00000000000000000000000100;
+        // Initialize two operands as zero
+        int256 numA = Zero();
+        int256 numB = Zero();
 
-	// Calculate and print the product
-	int256 result = Karatsuba(numA, numB, TOTAL_BITS);
-	PrintNum(result, 1);
-	
-	
-    // Write the encrypted message to the computer
-    //WriteBlock(encMessage);
+        // Edit limbs to create non-zero numbers
+        numA.a[0] = 0b11000000000000000000000000;
+        numB.a[0] = 0b01000000000000000000000011;
+        numB.a[1] = 0b00000000000000000000111011;
+        numB.a[2] = 0b00000000000000000000000100;
+
+        // Calculate and print the product
+        int256 result = Karatsuba(numA, numB, TOTAL_BITS);
+        PrintNum(result, 1);
+        
+        
+        // Write the encrypted message to the computer
+        //WriteBlock(encMessage);
+    }
+
+
     hal_led_off();
 
     while (1)

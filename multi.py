@@ -16,6 +16,7 @@ opcodes = {
   5 : "TME",
   255 : "ERR"}
 
+print("Starting calculations")
 
 for i in range(10):
   opc = random.choice([0,1])
@@ -23,6 +24,11 @@ for i in range(10):
   print(opcodes[opc], end =" ")
 
   dev.write(opc.to_bytes(1, 'big'))
+
+  x = dev.readline()
+  print("Flag 1 - Read something")
+  print(x.decode()) # 
+  print("Flag 2 - We've printed it")
 
 
   a = random.randint(0, 1<<256-1)

@@ -15,7 +15,7 @@ include config.mk
 # additional dependencies for your the target TARGETNAME.elf file (just
 # define the dependencies, a generic rule for .elf target exists in
 # config.mk).
-CALCULATOR_SRC = aes-enc.c
+CALCULATOR_SRC = multi-precision.c
 
 ifeq ($(TARGET),stm32f4)
   CALCULATOR_SRC += demo.S # <-------------------- Change this away from the demo
