@@ -4,6 +4,7 @@
 #include <string.h>
 
 typedef struct { int32_t a[11]; } int256;
+typedef struct { int32_t a[22]; } int512;
 const uint16_t TOTAL_BITS = 256;
 const uint16_t TOTAL_LIMBS = 11;
 const uint8_t INT_BITS = 31; // Sign takes one bit
@@ -18,47 +19,13 @@ int256 MPASchoolbookMultiplication(int256 operand1, int256 operand2);
 int256 MPAAbsoluteValue(int256 number);
 int256 ReducedRepresentation(int256 number);
 int256 Zero();
+int512 Zero512();
+int512 ToInt512(int256 number);
 
-int ReadBytes(int bytes)
-{
-  int variable = 0;
-
-  for (int i = 0; i < bytes; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
-      variable = variable << 8 | hal_getchar();
-  
-  return variable;
-}
-
-void WriteBytes(int variable, int bytes)
-{
-  for (int i = 0; i < bytes; i++)
-      hal_putchar((variable >> (((bytes-1)-i)*8)) & 0xff);
-}
-
-int256 ReadInt256()
-{
-    int256 number = Zero();
-
-    number.a[TOTAL_LIMBS - 1] = ReadBytes(2);
-    for (int limb = (TOTAL_LIMBS - 2); limb > -1; limb--)
-        number.a[limb] = ReadBytes(3);
-
-    return number;
-}
-
-void WriteInt256(int256 variable)
-{
-    int value = variable.a[TOTAL_LIMBS - 1];
-    value = (value << 16) >> 16;
-    WriteBytes(value, 2);
-    
-    for (int limb = (TOTAL_LIMBS - 2); limb > -1; limb--)
-    {
-        value = variable.a[limb];
-        value = (value << 8) >> 8;
-        WriteBytes(value, 3);
-    }
-}
+int ReadBytes(int bytes);
+void WriteBytes(int variable, int bytes);
+int256 ReadInt256();
+void WriteInt256(int256 variable);
 
 
 int main()
@@ -76,7 +43,7 @@ int main()
 
         // Initialize two operands as zero
         int256 numA = ReadInt256();
-        int256 numB = Zero();
+        int256 numB = ReadInt256();
 
         printf("done loading - %u and %u and %u and %u and %u and %u and %u and %u and %u and %u and %u\n", numA.a[10], numA.a[9], numA.a[8], numA.a[7], numA.a[6], numA.a[5], numA.a[4], numA.a[3], numA.a[2], numA.a[1], numA.a[0]);
 
@@ -279,4 +246,63 @@ int256 Zero()
 		number.a[i] = 0;
 
 	return number;
+}
+
+int512 Zero512()
+{
+	int512 number;
+
+	for (int i = 0; i < (TOTAL_LIMBS * 2); i++)
+		number.a[i] = 0;
+
+	return number;
+}
+
+int512 ToInt512(int256 number)
+{
+	int512 newNumber = Zero512();
+
+	for (int i = 0; i < TOTAL_LIMBS; i++)
+		newNumber.a[i] = number.a[i];
+}
+
+int ReadBytes(int bytes)
+{
+  int variable = 0;
+
+  for (int i = 0; i < bytes; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
+      variable = variable << 8 | hal_getchar();
+  
+  return variable;
+}
+
+void WriteBytes(int variable, int bytes)
+{
+  for (int i = 0; i < bytes; i++)
+      hal_putchar((variable >> (((bytes-1)-i)*8)) & 0xff);
+}
+
+int256 ReadInt256()
+{
+    int256 number = Zero();
+
+    number.a[TOTAL_LIMBS - 1] = ReadBytes(2);
+    for (int limb = (TOTAL_LIMBS - 2); limb > -1; limb--)
+        number.a[limb] = ReadBytes(3);
+
+    return number;
+}
+
+void WriteInt256(int256 variable)
+{
+    int value = variable.a[TOTAL_LIMBS - 1];
+    value = (value << 16) >> 16;
+    WriteBytes(value, 2);
+    
+    for (int limb = (TOTAL_LIMBS - 2); limb > -1; limb--)
+    {
+        value = variable.a[limb];
+        value = (value << 8) >> 8;
+        WriteBytes(value, 3);
+    }
 }

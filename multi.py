@@ -37,10 +37,14 @@ for i in range(10):
 
 
   a = random.randint(0, 1<<256-1)
+  b = random.randint(0, 1<<256-1)
   print(f"a = {a}")
+  print(f"b = {b}")
   print(f"a binary = {bin(a)}")
+  print(f"b binary = {bin(b)}")
 
   dev.write(a.to_bytes(32, 'big'))
+  dev.write(b.to_bytes(32, 'big'))
   print("Flag 5 - sent data over")
 
   x = dev.readline()
@@ -56,11 +60,6 @@ for i in range(10):
   print(f"oth = {bin(a)}")
 
   print("Flag 9 - Comparisons'")
-
-
-  b = random.randint(0, 1<<256-1)
-
-  dev.write(b.to_bytes(32, 'big'))
 
 
   ret = int.from_bytes(dev.read(1), 'big')
