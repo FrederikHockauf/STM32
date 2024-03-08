@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
-#include <algorithm>
 
 typedef struct { int32_t a[10]; } int256;
 const uint16_t TOTAL_BITS = 256;
