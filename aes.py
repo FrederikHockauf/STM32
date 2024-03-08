@@ -29,8 +29,8 @@ for i in range(10):
   print("Flag 3 - writing data")
   # send key and data to device
   a = 127
-  dev.write(key)
   dev.write(data)
+  dev.write(key)
 
   print("Flag 4 - done writing data")
 
@@ -46,16 +46,16 @@ for i in range(10):
 
   for i in range(16):
     print(f"\n----\nround {i}")
-    print(f"dev = {sent_key[i]}")
-    print(f"oth = {key[i]}")
+    print(f"dev = {sent_message[i]}")
+    print(f"oth = {data[i]}")
   
 
   print("Flag 8 - done printing that")
 
   for i in range(16):
     print(f"\n----\nround {i}")
-    print(f"dev = {sent_message[i]}")
-    print(f"oth = {data[i]}")
+    print(f"dev = {sent_key[i]}")
+    print(f"oth = {key[i]}")
 
   print("Flag 9 - reading data")
 
