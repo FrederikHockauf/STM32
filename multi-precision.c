@@ -48,19 +48,42 @@ int main()
 
         printf("done loading - %u and %u and %u and %u and %u and %u and %u and %u and %u and %u and %u\n", numA.a[10], numA.a[9], numA.a[8], numA.a[7], numA.a[6], numA.a[5], numA.a[4], numA.a[3], numA.a[2], numA.a[1], numA.a[0]);
 
+        // Declare the time and result variables to be returned
+        int finalTime;
+        int512 result;
+
+        // Perform either addition (0) or multiplication (1)
+        if (opcode == 0)
+        {
+            // Start the time
+            int timeStart = hal_get_time();
+            
+            // Perform addition and convert the variable to a 512-variant
+            int256 total = MPAAdd(numA, numB);
+            result = ToInt512(ReducedRepresentation(total));
+
+            // Stop the time and calculate the final time
+            int timeStop = hal_get_time();
+            finalTime = timeStop - timeStart;            
+        }
+        else
+        {
+            // Start the time
+            int timeStart = hal_get_time();
+            
+            // Perform multiplication
+            int256 total = MPAAdd(numA, numB);
+
+            // Stop the time and calculate the final time
+            int timeStop = hal_get_time();
+            finalTime = timeStop - timeStart;
+        }
+
+        // Send back the result opcode and the result
         hal_putchar(opcode);
-
-        int timeStart = hal_get_time();
-        
-        int256 total = MPAAdd(numA, numB);
-
-        int timeStop = hal_get_time();
-        int finalTime = timeStop - timeStart;
-
-        int512 result = ToInt512(ReducedRepresentation(total));
-
         WriteInt512(result);
 
+        // Send back the time opcode and the time
         uint8_t timeOpcode = 5;
         hal_putchar(timeOpcode);
         WriteBytes(finalTime, 4);
