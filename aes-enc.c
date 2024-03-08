@@ -67,9 +67,7 @@ int main()
 	char a_new = (char) a;
 	int b = 7;
 	char b_new = (char)b;
-	printf("a = ");
-	printf(b_new);
-	printf("\n");
+	printf("a = %d\n", b);
 	//uint8_t alle = Read4Bytes();
 	//uint8_t alle2 = Read4Bytes();
 
