@@ -66,8 +66,9 @@ int main()
 	uint8_t a = Read4Bytes;
 	char a_new = (char) a;
 	int b = 7;
+	char b_new = (char)b;
 	printf("a = ");
-	printf((unsigned int) b);
+	printf(b_new);
 	printf("\n");
 	//uint8_t alle = Read4Bytes();
 	//uint8_t alle2 = Read4Bytes();
