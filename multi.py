@@ -52,17 +52,8 @@ for i in range(10):
 
   print("Flag 8 - Received sumthin'")
 
-  print("dev = ", end=" ")
-  for i in range(32):
-    value = bin(a_back[i])
-    print(f"{value} ", end=" ")
-  print("\n")
-
-  print("oth = ", end=" ")
-  for i in range(32):
-    value = bin(a[i])
-    print(f"{value} ", end=" ")
-  print("\n")
+  print(f"dev = {a_back}")
+  print(f"oth = {a}")
 
   print("Flag 9 - Comparisons'")
 
