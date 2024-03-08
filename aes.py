@@ -30,9 +30,10 @@ for i in range(10):
   # send key and data to device
   a = 127
   dev.write(key)
+  dev.write(data)
 
-  print("Flag 4 - sent data")
-  print(int.from_bytes(key, "big"))
+  print("Flag 4 - done writing data")
+
 
   x = dev.readline()
   print("Flag 5 - Read something")
@@ -40,23 +41,11 @@ for i in range(10):
   print("Flag 6 - We've printed it")
 
 
-
-  ##dev.write(key)
-  ##dev.write(data)
-  print("Flag 6 - done writing data")
-
-
-  x = dev.readline()
-  print("Flag 7 - Read something")
-  print(x.decode()) # 
-  print("Flag 8 - We've printed it")
-
-
-  print("Flag 9 - reading data")
+  print("Flag 7 - reading data")
 
   # read cipher text from device
   ciphertext_dev = dev.read(16)
-  print("Flag 10 - done reading data")
+  print("Flag 9 - done reading data")
 
   # generate reference cipher block
   cipher = AES.new(key, AES.MODE_ECB)

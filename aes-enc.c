@@ -70,14 +70,14 @@ int main()
   	//for (int i = 0; i < 4; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
 	//	variable = variable << 8 | hal_getchar();
 
-	uint8_t v1 = hal_getchar();
-	uint8_t v2 = hal_getchar();
-	uint8_t v3 = hal_getchar();
-	uint8_t v4 = hal_getchar();
+	//uint8_t v1 = hal_getchar();
+	//uint8_t v2 = hal_getchar();
+	//uint8_t v3 = hal_getchar();
+	//uint8_t v4 = hal_getchar();
 	
 	//uint8_t a = Read4Bytes;
 	//printf("a = %u and %u and %u and %u \n", variable1, variable2, variable3, variable4);
-	printf("a = %u and %u and %u and %u \n", v1, v2, v3, v4);
+	//printf("a = %u and %u and %u and %u \n", v1, v2, v3, v4);
 	//uint8_t alle = Read4Bytes();
 	//uint8_t alle2 = Read4Bytes();
 
@@ -136,7 +136,7 @@ void ReadBlock(uint8_t block[4][4])
     // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
 	for (int i = 0; i < 4; i++)
         for (int j = 0; j < 4; j++)
-            block[i][j] = Read4Bytes();
+            block[i][j] = hal_getchar();
 }
 
 void WriteBlock(uint8_t block[4][4])
@@ -144,7 +144,7 @@ void WriteBlock(uint8_t block[4][4])
     // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
 	for (int i = 0; i < 4; i++)
         for (int j = 0; j < 4; j++)
-			Write4Bytes(block[i][j]);
+			hal_putchar(block[i][j]);
 }
 
 void AESKeyExpansion(uint8_t key[4][4], uint8_t expandedKey[11][4][4])
