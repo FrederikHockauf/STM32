@@ -44,25 +44,26 @@ for i in range(10):
   sent_message = dev.read(16)
   print("Flag 7 - got data back")
 
-  print(f"dev = ")
+  print(f"dev = ", end=" ")
   for i in range(16):
-    print(f"{sent_key[i]} ", end=" ")
+    val = hex(sent_key[i]).lstrip("0x").rstrip("L")
+    print(f"{val} ", end=" ")
   print("")
 
-  print(f"oth = ")
+  print(f"oth = ", end=" ")
   for i in range(16):
     print(f"{key[i]} ", end=" ")
   print("\n\n")
 
-  print(f"dev = ")
+  print(f"dev = ", end=" ")
   for i in range(16):
     print(f"{sent_message[i]} ", end=" ")
   print("")
 
-  print(f"oth = ")
+  print(f"oth = ", end=" ")
   for i in range(16):
     print(f"{data[i]} ", end=" ")
-  print("\n\n")
+  print("\n")
   
 
   print("Flag 8 - done printing that now")
