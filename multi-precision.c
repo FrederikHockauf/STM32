@@ -6,7 +6,7 @@
 typedef struct { int32_t a[10]; } int256;
 const uint16_t TOTAL_BITS = 256;
 const uint8_t INT_BITS = 31; // Sign takes one bit
-const uint8_t RADIX = 26;
+const uint8_t RADIX = 23;
 
 int256 Karatsuba(int256 a, int256 b, int bits);
 int256 MPAAdd(int256 operand1, int256 operand2);
@@ -17,6 +17,22 @@ int256 MPASchoolbookMultiplication(int256 operand1, int256 operand2);
 int256 MPAAbsoluteValue(int256 number);
 int256 ReducedRepresentation(int256 number);
 int256 Zero();
+
+int Read4Bytes()
+{
+  int variable = 0;
+
+  for (int i = 0; i < 4; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
+      variable = variable << 8 | hal_getchar();
+  
+  return variable;
+}
+
+void Write4Bytes(int variable)
+{
+  for (int i = 0; i < 4; i++)
+      hal_putchar((variable >> ((3-i)*8)) & 0xff);
+}
 
 
 int main()
@@ -36,11 +52,22 @@ int main()
         int256 numA = Zero();
         int256 numB = Zero();
 
+        numA.a[7] = Read4Bytes();
+        numA.a[6] = Read4Bytes();
+        numA.a[5] = Read4Bytes();
+        numA.a[4] = Read4Bytes();
+        numA.a[3] = Read4Bytes();
+        numA.a[2] = Read4Bytes();
+        numA.a[1] = Read4Bytes();
+        numA.a[0] = Read4Bytes();
+
+        printf("done loading\n");
+
         // Edit limbs to create non-zero numbers
-        numA.a[0] = 0b11000000000000000000000000;
-        numB.a[0] = 0b01000000000000000000000011;
-        numB.a[1] = 0b00000000000000000000111011;
-        numB.a[2] = 0b00000000000000000000000100;
+        //numA.a[0] = 0b11000000000000000000000000;
+        //numB.a[0] = 0b01000000000000000000000011;
+        //numB.a[1] = 0b00000000000000000000111011;
+        //numB.a[2] = 0b00000000000000000000000100;
 
         // Calculate and print the product
         int256 result = Karatsuba(numA, numB, TOTAL_BITS);

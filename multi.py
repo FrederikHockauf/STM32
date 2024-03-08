@@ -38,9 +38,15 @@ for i in range(10):
 
   a = random.randint(0, 1<<256-1)
   print(f"a = {a}")
+  print(f"a binary = {bin(a)}")
 
   dev.write(a.to_bytes(32, 'big'))
+  print("Flag 5 - sent data over")
 
+  x = dev.readline()
+  print("Flag 6 - Read something")
+  print(x.decode()) # 
+  print("Flag 7 - We've printed it")
 
   b = random.randint(0, 1<<256-1)
 
