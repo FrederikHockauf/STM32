@@ -50,13 +50,13 @@ for i in range(10):
     print(f"oth = {key[i]}")
   
 
-  print("Flag 8 - done printing that")
+  print("Flag 8 - done printing that now")
 
   for i in range(16):
     print(f"\n----\nround {i}")
     print(f"dev = {sent_key[i]}")
     print(f"oth = {data[i]}")
-
+    
   print("Flag 9 - reading data")
 
   # read cipher text from device

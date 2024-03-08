@@ -85,7 +85,7 @@ int main()
     ReadBlock(key);
     ReadBlock(message);
 
-	printf("From device - Another check\n");
+	printf("From device - Another check!\n");
 
 	WriteBlock(key);
 	WriteBlock(message);
