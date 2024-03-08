@@ -17,8 +17,6 @@ print("started the encryption thing")
 
 # run ten tests
 for i in range(10):
-  
-
   # generate random 128 bit key and random 128 bit data block
   key = bytes(random.getrandbits(8) for _ in range(16))
   data = bytes(random.getrandbits(8) for _ in range(16))
