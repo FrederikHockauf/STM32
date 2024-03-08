@@ -68,13 +68,12 @@ int main()
 	uint8_t variable3 = Read4Bytes();
 	uint8_t variable4 = Read4Bytes();
 	uint8_t variable5 = Read4Bytes();
-	uint8_t variable6 = Read4Bytes();
   	//for (int i = 0; i < 4; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
 	//	variable = variable << 8 | hal_getchar();
 	
 	//uint8_t a = Read4Bytes;
 	int b = 7;
-	printf("a = %u and %u and %u and %u and %u and %u \n", variable1, variable2, variable3, variable4, variable5, variable6);
+	printf("a = %u and %u and %u and %u and %u \n", variable1, variable2, variable3, variable4, variable5);
 	//uint8_t alle = Read4Bytes();
 	//uint8_t alle2 = Read4Bytes();
 
