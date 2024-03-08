@@ -52,17 +52,20 @@ for i in range(10):
 
   print(f"oth = ", end=" ")
   for i in range(16):
-    print(f"{key[i]} ", end=" ")
+    val = hex(key[i]).lstrip("0x").rstrip("L")
+    print(f"{val} ", end=" ")
   print("\n\n")
 
   print(f"dev = ", end=" ")
   for i in range(16):
-    print(f"{sent_message[i]} ", end=" ")
+    val = hex(sent_message[i]).lstrip("0x").rstrip("L")
+    print(f"{val} ", end=" ")
   print("")
 
   print(f"oth = ", end=" ")
   for i in range(16):
-    print(f"{data[i]} ", end=" ")
+    val = hex(data[i]).lstrip("0x").rstrip("L")
+    print(f"{val} ", end=" ")
   print("\n")
   
 
@@ -78,14 +81,25 @@ for i in range(10):
   cipher = AES.new(key, AES.MODE_ECB)
   ciphertext_rev = cipher.encrypt(data)
 
+  print(f"dev = ", end=" ")
+  for i in range(16):
+    val = hex(ciphertext_dev[i]).lstrip("0x").rstrip("L")
+    print(f"{val} ", end=" ")
+  print("")
+
+  print(f"oth = ", end=" ")
+  for i in range(16):
+    val = hex(ciphertext_rev[i]).lstrip("0x").rstrip("L")
+    print(f"{val} ", end=" ")
+  print("\n")
 
   # compare reference and response block byte-by-byte
-  for i in range(16):
+  """for i in range(16):
     print(f"\n----\nround {i}")
     print(f"dev = {ciphertext_dev[i]}")
     print(f"oth = {ciphertext_rev[i]}")
     if ciphertext_dev[i] != ciphertext_rev[i]:
-      pass
+      pass"""
       #print("\n----\nround 1")
       #print(f"dev = {ciphertext_dev[i]}")
       #print(f"oth = {ciphertext_rev[i]}")
