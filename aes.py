@@ -29,7 +29,7 @@ for i in range(10):
   print("Flag 3 - writing data")
   # send key and data to device
   a = 4
-  dev.write(a)
+  dev.write(key)
 
   print("Flag 4 - sent data")
 
