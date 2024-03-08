@@ -46,7 +46,7 @@ for i in range(10):
 
   for i in range(16):
     print(f"\n----\nround {i}")
-    print(f"dev = {sent_key[i]} ", end="")
+    print(f"dev = {sent_key[i]} ", end=" ")
     #print(f"oth = {key[i]}")
   
 
@@ -54,7 +54,7 @@ for i in range(10):
 
   for i in range(16):
     print(f"\n----\nround {i}")
-    print(f"dev = {sent_message[i]} ", end="")
+    print(f"dev = {sent_message[i]} ", end=" ")
     #print(f"oth = {data[i]}")
     
   print("Flag 9 - reading data")
