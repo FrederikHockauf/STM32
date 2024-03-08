@@ -63,9 +63,9 @@ int main()
 
 	printf("From device - This works?\n");
 	
-	uint8_t variable = 0;
-  	for (int i = 0; i < 4; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
-		variable = variable << 8 | hal_getchar();
+	uint8_t variable = Read4Bytes();
+  	//for (int i = 0; i < 4; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
+	//	variable = variable << 8 | hal_getchar();
 	
 	//uint8_t a = Read4Bytes;
 	int b = 7;
