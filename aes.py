@@ -43,30 +43,6 @@ for i in range(10):
   sent_key = dev.read(16)
   sent_message = dev.read(16)
   print("Flag 7 - got data back")
-
-  print(f"dev = ", end=" ")
-  for i in range(16):
-    val = hex(sent_key[i]).lstrip("0x").rstrip("L")
-    print(f"{val} ", end=" ")
-  print("")
-
-  print(f"oth = ", end=" ")
-  for i in range(16):
-    val = hex(key[i]).lstrip("0x").rstrip("L")
-    print(f"{val} ", end=" ")
-  print("\n\n")
-
-  print(f"dev = ", end=" ")
-  for i in range(16):
-    val = hex(sent_message[i]).lstrip("0x").rstrip("L")
-    print(f"{val} ", end=" ")
-  print("")
-
-  print(f"oth = ", end=" ")
-  for i in range(16):
-    val = hex(data[i]).lstrip("0x").rstrip("L")
-    print(f"{val} ", end=" ")
-  print("\n")
   
 
   print("Flag 8 - done printing that now")
@@ -81,29 +57,11 @@ for i in range(10):
   cipher = AES.new(key, AES.MODE_ECB)
   ciphertext_rev = cipher.encrypt(data)
 
-  print(f"dev = ", end=" ")
-  for i in range(16):
-    val = hex(ciphertext_dev[i]).lstrip("0x").rstrip("L")
-    print(f"{val} ", end=" ")
-  print("")
-
-  print(f"oth = ", end=" ")
-  for i in range(16):
-    val = hex(ciphertext_rev[i]).lstrip("0x").rstrip("L")
-    print(f"{val} ", end=" ")
-  print("\n")
-
   # compare reference and response block byte-by-byte
-  """for i in range(16):
-    print(f"\n----\nround {i}")
-    print(f"dev = {ciphertext_dev[i]}")
-    print(f"oth = {ciphertext_rev[i]}")
+  for i in range(16):
     if ciphertext_dev[i] != ciphertext_rev[i]:
-      pass"""
-      #print("\n----\nround 1")
-      #print(f"dev = {ciphertext_dev[i]}")
-      #print(f"oth = {ciphertext_rev[i]}")
-      #print("Error in encryption!\n")
+      print("Error in encryption!\n")
+      sys.exit(-1)
   
-  sys.exit(-1)
+  print("Flag 11 - This was a success")
  
