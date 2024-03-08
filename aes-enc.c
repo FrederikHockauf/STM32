@@ -59,14 +59,9 @@ int main()
 	uint8_t key[4][4];
 	uint8_t expandedKey[11][4][4];
 
-	//printf("From device - This works?\n");
-
     // Read the data from the computer
     ReadBlock(key);
     ReadBlock(message);
-
-	//printf("From device - Done readingn\n");
-	hal_led_off();
 
 	// Prepare for the round operations by expanding the key, readying the encryption message, and adding the 0th round key
 	AESKeyExpansion(key, expandedKey);
@@ -84,7 +79,7 @@ int main()
 		AddRoundKey(encMessage, expandedKey[i]);	
 	}
 
-    // Read the data from the computer
+    // Write the encrypted message to the computer
     WriteBlock(encMessage);
     hal_led_off();
 

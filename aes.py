@@ -13,7 +13,7 @@ if len(sys.argv) < 2:
 
 dev = serial.Serial(sys.argv[1], 115200)
 
-print("started the encryption thing")
+print("started the encryption")
 
 # run ten tests
 for i in range(10):
@@ -38,5 +38,5 @@ for i in range(10):
       print("Error in encryption!\n")
       sys.exit(-1)
   
-  print("Flag 11 - This was a success")
+  print("Succeeded in encrypting")
  
