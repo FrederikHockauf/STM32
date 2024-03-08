@@ -60,6 +60,8 @@ int main()
 	uint8_t encMessage[4][4];
 	uint8_t key[4][4];
 	uint8_t expandedKey[11][4][4];
+
+	printf("From device - This works?\n");
 	
 	//uint8_t variable1 = Read4Bytes();
 	//uint8_t variable2 = Read4Bytes();
@@ -82,6 +84,11 @@ int main()
     // Read the data from the computer
     ReadBlock(key);
     ReadBlock(message);
+
+	printf("From device - Another check!\n");
+
+	WriteBlock(key);
+	WriteBlock(message);
 
 	//printf("From device - Done readingn\n");
 	hal_led_off();

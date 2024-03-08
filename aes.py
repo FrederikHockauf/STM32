@@ -17,6 +17,11 @@ print("started the encryption thing")
 
 # run ten tests
 for i in range(10):
+  x = dev.readline()
+  print("Flag 1 - Read something")
+  print(x.decode()) # 
+  print("Flag 2 - We've printed it")
+
   # generate random 128 bit key and random 128 bit data block
   key = bytes(random.getrandbits(8) for _ in range(16))
   data = bytes(random.getrandbits(8) for _ in range(16))
@@ -28,15 +33,22 @@ for i in range(10):
   dev.write(data)
 
   print("Flag 4 - done writing data")
+
+
+  x = dev.readline()
+  print("Flag 5 - Read something")
+  print(x.decode()) # 
+  print("Flag 6 - We've printed it")
+  print("Flag 7 - got data back")
   
 
-  print("Flag 5 - done printing that now")
+  print("Flag 8 - done printing that now")
     
-  print("Flag 6 - reading data")
+  print("Flag 9 - reading data")
 
   # read cipher text from device
   ciphertext_dev = dev.read(16)
-  print("Flag 7 - done reading data")
+  print("Flag 10 - done reading data")
 
   # generate reference cipher block
   cipher = AES.new(key, AES.MODE_ECB)
@@ -48,5 +60,5 @@ for i in range(10):
       print("Error in encryption!\n")
       sys.exit(-1)
   
-  print("Flag 8 - This was a success")
+  print("Flag 11 - This was a success")
  
