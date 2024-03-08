@@ -48,6 +48,25 @@ for i in range(10):
   print(x.decode()) # 
   print("Flag 7 - We've printed it")
 
+  a_back = int.from_bytes(dev.read(32), 'big')
+
+  print("Flag 8 - Received sumthin'")
+
+  print("dev = ", end=" ")
+  for i in range(32):
+    value = bin(a_back[i])
+    print(f"{value} ", end=" ")
+  print("\n")
+
+  print("oth = ", end=" ")
+  for i in range(32):
+    value = bin(a[i])
+    print(f"{value} ", end=" ")
+  print("\n")
+
+  print("Flag 9 - Comparisons'")
+
+
   b = random.randint(0, 1<<256-1)
 
   dev.write(b.to_bytes(32, 'big'))

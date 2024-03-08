@@ -46,6 +46,19 @@ int256 ReadInt256()
     return number;
 }
 
+void WriteInt256(int256 variable)
+{
+    int value = variable.a[TOTAL_LIMBS - 1];
+    value = (value << 16) >> 16;
+    
+    for (int limb = (TOTAL_LIMBS - 2); limb > -1; limb--)
+    {
+        value = variable.a[limb];
+        value = (value << 8) >> 8;
+        WriteBytes(value, 3);
+    }
+}
+
 
 int main()
 {
@@ -65,6 +78,8 @@ int main()
         int256 numB = Zero();
 
         printf("done loading - %u and %u and %u and %u and %u and %u and %u and %u and %u and %u and %u\n", numA.a[10], numA.a[9], numA.a[8], numA.a[7], numA.a[6], numA.a[5], numA.a[4], numA.a[3], numA.a[2], numA.a[1], numA.a[0]);
+
+        WriteInt256(numA);
 
         // Edit limbs to create non-zero numbers
         //numA.a[0] = 0b11000000000000000000000000;
