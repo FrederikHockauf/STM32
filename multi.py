@@ -37,6 +37,7 @@ for i in range(10):
 
 
   a = random.randint(0, 1<<256-1)
+  print(f"a = {a}")
 
   dev.write(a.to_bytes(32, 'big'))
 
