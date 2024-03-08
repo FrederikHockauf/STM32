@@ -41,6 +41,7 @@ for i in range(10):
   print("Flag 6 - We've printed it")
 
 
+
   print("Flag 7 - reading data")
 
   # read cipher text from device
