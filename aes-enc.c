@@ -59,6 +59,8 @@ int main()
 	uint8_t key[4][4];
 	uint8_t expandedKey[11][4][4];
 
+	printf("From device - This works?\n");
+
     // Read the data from the computer
     ReadBlock(key);
     ReadBlock(message);
