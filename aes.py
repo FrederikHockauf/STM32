@@ -45,7 +45,7 @@ for i in range(10):
 
   # read cipher text from device
   ciphertext_dev = dev.read(16)
-  print("Flag 9 - done reading data")
+  print("Flag 8 - done reading data")
 
   # generate reference cipher block
   cipher = AES.new(key, AES.MODE_ECB)
@@ -54,7 +54,14 @@ for i in range(10):
 
   # compare reference and response block byte-by-byte
   for i in range(16):
+    print("\n----\nround 1")
+    print(f"dev = {ciphertext_dev[i]}")
+    print(f"oth = {ciphertext_rev[i]}")
     if ciphertext_dev[i] != ciphertext_rev[i]:
-      print("Error in encryption!\n")
-      sys.exit(-1)
+      print("\n----\nround 1")
+      print(f"dev = {ciphertext_dev[i]}")
+      print(f"oth = {ciphertext_rev[i]}")
+      #print("Error in encryption!\n")
+  
+  sys.exit(-1)
  
