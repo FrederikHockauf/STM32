@@ -20,9 +20,9 @@ print("Starting calculations")
 
 for i in range(10):
   x = dev.readline()
-  print("Flag 1 - Read something")
+  #print("Flag 1 - Read something")
   print(x.decode()) # 
-  print("Flag 2 - We've printed it")
+  #print("Flag 2 - We've printed it")
 
   opc = random.choice([0,1])
 
@@ -31,30 +31,30 @@ for i in range(10):
   dev.write(opc.to_bytes(1, 'big'))
 
   x = dev.readline()
-  print("Flag 3 - Read something")
+  #print("Flag 3 - Read something")
   print(x.decode()) # 
-  print("Flag 4 - We've printed it")
+  #print("Flag 4 - We've printed it")
 
 
   a = random.randint(0, 1<<256-1)
   b = random.randint(0, 1<<256-1)
-  print(f"a = {a}")
-  print(f"b = {b}")
-  print(f"a binary = {bin(a)}")
-  print(f"b binary = {bin(b)}")
+  #print(f"a = {a}")
+  #print(f"b = {b}")
+  #print(f"a binary = {bin(a)}")
+  #print(f"b binary = {bin(b)}")
 
   dev.write(a.to_bytes(32, 'big'))
   dev.write(b.to_bytes(32, 'big'))
-  print("Flag 5 - sent data over")
+  #print("Flag 5 - sent data over")
 
   x = dev.readline()
-  print("Flag 6 - Read something")
+  #print("Flag 6 - Read something")
   print(x.decode()) # 
-  print("Flag 7 - We've printed it")
+  #print("Flag 7 - We've printed it")
 
   ret = int.from_bytes(dev.read(1), 'big')
 
-  print("Flag 8 - Gotten opcode back")
+  #print("Flag 8 - Gotten opcode back")
 
 
   if opcodes[ret] != "ERR":
