@@ -110,7 +110,7 @@ int main()
 	}
 
     // Read the data from the computer
-    WriteBlock(key);
+    WriteBlock(encMessage);
     hal_led_off();
 
     while (1)
