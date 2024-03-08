@@ -19,6 +19,11 @@ opcodes = {
 print("Starting calculations")
 
 for i in range(10):
+  x = dev.readline()
+  print("Flag 1 - Read something")
+  print(x.decode()) # 
+  print("Flag 2 - We've printed it")
+
   opc = random.choice([0,1])
 
   print(opcodes[opc], end =" ")
@@ -26,9 +31,9 @@ for i in range(10):
   dev.write(opc.to_bytes(1, 'big'))
 
   x = dev.readline()
-  print("Flag 1 - Read something")
+  print("Flag 3 - Read something")
   print(x.decode()) # 
-  print("Flag 2 - We've printed it")
+  print("Flag 4 - We've printed it")
 
 
   a = random.randint(0, 1<<256-1)

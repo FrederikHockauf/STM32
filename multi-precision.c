@@ -27,8 +27,10 @@ int main()
 
     for (int rounds = 0; rounds < 10; rounds++)
     {
+        printf("alive and well\n");
+
         uint8_t opcode = hal_getchar();
-        printf("opcode = %u", opcode);
+        printf("opcode = %u\n", opcode);
 
         // Initialize two operands as zero
         int256 numA = Zero();
