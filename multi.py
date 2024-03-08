@@ -52,27 +52,23 @@ for i in range(10):
   print(x.decode()) # 
   print("Flag 7 - We've printed it")
 
-  a_back = int.from_bytes(dev.read(32), 'big')
-
-  print("Flag 8 - Received sumthin'")
-
-  print(f"dev = {bin(a_back)}")
-  print(f"oth = {bin(a)}")
-
-  print("Flag 9 - Comparisons'")
-
-
   ret = int.from_bytes(dev.read(1), 'big')
+
+  print("Flag 8 - Gotten opcode back")
 
 
   if opcodes[ret] != "ERR":
     res = int.from_bytes(dev.read(64), 'big')
    
     if opcodes[opc] == "ADD":
+      print("Flag  9 - ADD")
+      print(f"res = {res}")
+      print(f"oth = {a+b}")
       print((a+b) == res, end =" ")
 
 
     if opcodes[opc] == "MUL":
+      print("Flag  9 - MUL")
       print((a*b) == res, end =" ")
 
 

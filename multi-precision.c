@@ -26,6 +26,7 @@ int ReadBytes(int bytes);
 void WriteBytes(int variable, int bytes);
 int256 ReadInt256();
 void WriteInt256(int256 variable);
+void WriteInt512(int512 variable);
 
 
 int main()
@@ -47,7 +48,12 @@ int main()
 
         printf("done loading - %u and %u and %u and %u and %u and %u and %u and %u and %u and %u and %u\n", numA.a[10], numA.a[9], numA.a[8], numA.a[7], numA.a[6], numA.a[5], numA.a[4], numA.a[3], numA.a[2], numA.a[1], numA.a[0]);
 
-        WriteInt256(numA);
+        hal_putchar(opcode);
+
+        int256 total = MPAAdd(numA, numB);
+        int512 result = ToInt512(ReducedRepresentation(total));
+
+        WriteInt512(result);
 
         // Edit limbs to create non-zero numbers
         //numA.a[0] = 0b11000000000000000000000000;
@@ -264,6 +270,8 @@ int512 ToInt512(int256 number)
 
 	for (int i = 0; i < TOTAL_LIMBS; i++)
 		newNumber.a[i] = number.a[i];
+    
+    return newNumber;
 }
 
 int ReadBytes(int bytes)
@@ -300,6 +308,20 @@ void WriteInt256(int256 variable)
     WriteBytes(value, 2);
     
     for (int limb = (TOTAL_LIMBS - 2); limb > -1; limb--)
+    {
+        value = variable.a[limb];
+        value = (value << 8) >> 8;
+        WriteBytes(value, 3);
+    }
+}
+
+void WriteInt512(int512 variable)
+{
+    int value = variable.a[(TOTAL_LIMBS * 2) - 1];
+    value = (value << 24) >> 24;
+    WriteBytes(value, 1);
+    
+    for (int limb = ((TOTAL_LIMBS * 2) - 2); limb > -1; limb--)
     {
         value = variable.a[limb];
         value = (value << 8) >> 8;
