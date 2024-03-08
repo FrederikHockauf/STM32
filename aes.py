@@ -34,12 +34,6 @@ for i in range(10):
 
   print("Flag 4 - done writing data")
 
-
-  x = dev.readline()
-  print("Flag 5 - Read something")
-  print(x.decode()) # 
-  print("Flag 6 - We've printed it")
-
   # read cipher text from device
   ciphertext_dev = dev.read(16)
 

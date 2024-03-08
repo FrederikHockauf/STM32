@@ -65,8 +65,6 @@ int main()
     ReadBlock(key);
     ReadBlock(message);
 
-	printf("From device - Another check!\n");
-
 	//printf("From device - Done readingn\n");
 	hal_led_off();
 
