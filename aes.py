@@ -54,13 +54,13 @@ for i in range(10):
 
   # compare reference and response block byte-by-byte
   for i in range(16):
-    print("\n----\nround 1")
+    print(f"\n----\nround {i}")
     print(f"dev = {ciphertext_dev[i]}")
     print(f"oth = {ciphertext_rev[i]}")
     if ciphertext_dev[i] != ciphertext_rev[i]:
-      print("\n----\nround 1")
-      print(f"dev = {ciphertext_dev[i]}")
-      print(f"oth = {ciphertext_rev[i]}")
+      #print("\n----\nround 1")
+      #print(f"dev = {ciphertext_dev[i]}")
+      #print(f"oth = {ciphertext_rev[i]}")
       #print("Error in encryption!\n")
   
   sys.exit(-1)
