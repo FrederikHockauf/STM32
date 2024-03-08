@@ -42,7 +42,6 @@ int main()
 
         // Calculate and print the product
         int256 result = Karatsuba(numA, numB, TOTAL_BITS);
-        PrintNum(result, 1);
         
         
         // Write the encrypted message to the computer
@@ -152,7 +151,7 @@ int256 MPABitshiftLeft(int256 number, int places)
 	for (int i = 8; i >= 0; i--)
 	{
 		// Find the portion of the i'th limb that will get deleted and save it
-		uint32_t mask = (((1 << RADIX) - 1) >> RADIX - places) << RADIX - places;
+		uint32_t mask = (((1 << RADIX) - 1) >> (RADIX - places)) << (RADIX - places);
 		uint32_t carryOver = number.a[i] & mask;
 
 		// Add the saved portion to the limb above and shift the limb itself
