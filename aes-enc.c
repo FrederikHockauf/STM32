@@ -61,16 +61,18 @@ int main()
 	uint8_t key[4][4];
 	uint8_t expandedKey[11][4][4];
 
-	//printf("From device - This works?\n");
+	printf("From device - This works?\n");
 	
+	uint8_t a = Read4Bytes;
+	printf("a = \"%s\"\n", (int) a);
 	//uint8_t alle = Read4Bytes();
 	//uint8_t alle2 = Read4Bytes();
 
-	//printf("From device - Another check\n");
+	printf("From device - Another check\n");
 
     // Read the data from the computer
-    //ReadBlock(key);
-    //ReadBlock(message);
+    ReadBlock(key);
+    ReadBlock(message);
 
 	//printf("From device - Done readingn\n");
 	hal_led_off();
@@ -92,7 +94,7 @@ int main()
 	}
 
     // Read the data from the computer
-    //WriteBlock(key);
+    WriteBlock(key);
     hal_led_off();
 
     while (1)

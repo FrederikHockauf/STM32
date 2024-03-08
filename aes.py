@@ -22,7 +22,6 @@ for i in range(10):
   print(x.decode()) # 
   print("Flag 2 - We've printed it")
 
-
   # generate random 128 bit key and random 128 bit data block
   key = bytes(random.getrandbits(8) for _ in range(16))
   data = bytes(random.getrandbits(8) for _ in range(16))
@@ -30,32 +29,14 @@ for i in range(10):
   print("Flag 3 - writing data")
   # send key and data to device
   a = 16
-  b = 5
-  c = 37
-  d = 137
-
-  print(f"a = {a}")
-  print(f"b = {b}")
-  print(f"c = {c}")
-  print(f"d = {d}\n")
-
-  print(f"[w] a = {a}")
   dev.write(a)
-  print(f"[r] a = {dev.read(4)}")
-  print(f"[w] b = {b}")
-  dev.write(b)
-  print(f"[r] b = {dev.read(4)}")
-  print(f"[w] c = {c}")
-  dev.write(c)
-  print(f"[r] c = {dev.read(4)}")
-  print(f"[w] d = {d}")
-  dev.write(d)
-  print(f"[r] d = {dev.read(4)}")
+
+  print("Flag 4 - sent data")
 
   x = dev.readline()
-  print("Flag 4 - Read something")
+  print("Flag 5 - Read something")
   print(x.decode()) # 
-  print("Flag 5 - We've printed it")
+  print("Flag 6 - We've printed it")
 
 
 
