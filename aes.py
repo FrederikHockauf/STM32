@@ -17,7 +17,10 @@ print("started the encryption thing")
 
 # run ten tests
 for i in range(10):
-  
+  x = dev.readline()
+  print("Flag 1 - Read something")
+  print(x.decode()) # 
+  print("Flag 2 - We've printed it")
 
   # generate random 128 bit key and random 128 bit data block
   key = bytes(random.getrandbits(8) for _ in range(16))
@@ -25,6 +28,7 @@ for i in range(10):
 
   print("Flag 3 - writing data")
   # send key and data to device
+  a = 127
   dev.write(key)
   dev.write(data)
 
