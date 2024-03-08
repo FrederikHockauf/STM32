@@ -28,7 +28,7 @@ for i in range(10):
 
   print("Flag 3 - writing data")
   # send key and data to device
-  a = 1272423
+  a = 127
   dev.write(a)
 
   print("Flag 4 - sent data")
