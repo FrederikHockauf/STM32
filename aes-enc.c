@@ -63,13 +63,14 @@ int main()
 
 	printf("From device - This works?\n");
 	
-	uint8_t variable = Read4Bytes();
+	uint8_t variable1 = Read4Bytes();
+	uint8_t variable2 = Read4Bytes();
   	//for (int i = 0; i < 4; i++) // Load the 4-byte int in byt bitshifting (8 times as 1 byte = 8 bit)
 	//	variable = variable << 8 | hal_getchar();
 	
 	//uint8_t a = Read4Bytes;
 	int b = 7;
-	printf("a = %u \n", variable);
+	printf("a = %u and %u \n", variable1, variable2);
 	//uint8_t alle = Read4Bytes();
 	//uint8_t alle2 = Read4Bytes();
 
