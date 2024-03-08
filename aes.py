@@ -52,8 +52,6 @@ for i in range(10):
   dev.write(d)
   print(f"[r] d = {dev.read(4)}")
 
-  dev.write(thinke)
-
   x = dev.readline()
   print("Flag 4 - Read something")
   print(x.decode()) # 
