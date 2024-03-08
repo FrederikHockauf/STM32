@@ -61,7 +61,7 @@ int main()
         numA.a[1] = Read4Bytes();
         numA.a[0] = Read4Bytes();
 
-        printf("done loading\n");
+        printf("done loading - %u and %u and %u and %u and %u and %u and %u and %u\n", numA.a[7], numA.a[6], numA.a[5], numA.a[4], numA.a[3], numA.a[2], numA.a[1], numA.a[0]);
 
         // Edit limbs to create non-zero numbers
         //numA.a[0] = 0b11000000000000000000000000;
