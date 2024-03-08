@@ -50,6 +50,7 @@ void WriteInt256(int256 variable)
 {
     int value = variable.a[TOTAL_LIMBS - 1];
     value = (value << 16) >> 16;
+    WriteBytes(value, 2);
     
     for (int limb = (TOTAL_LIMBS - 2); limb > -1; limb--)
     {
