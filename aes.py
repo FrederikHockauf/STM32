@@ -43,15 +43,9 @@ for i in range(10):
   sent_key = dev.read(16)
   sent_message = dev.read(16)
   print("Flag 7 - got data back")
-  
-
-  print("Flag 8 - done printing that now")
-    
-  print("Flag 9 - reading data")
 
   # read cipher text from device
   ciphertext_dev = dev.read(16)
-  print("Flag 10 - done reading data")
 
   # generate reference cipher block
   cipher = AES.new(key, AES.MODE_ECB)
