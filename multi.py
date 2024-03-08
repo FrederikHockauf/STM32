@@ -48,6 +48,11 @@ for i in range(10):
   print(x.decode()) # 
   print("Flag 7 - We've printed it")
 
+  x = dev.readline()
+  print("Flag 8 - Read something")
+  print(x.decode()) # 
+  print("Flag 9 - We've printed it")
+
   b = random.randint(0, 1<<256-1)
 
   dev.write(b.to_bytes(32, 'big'))

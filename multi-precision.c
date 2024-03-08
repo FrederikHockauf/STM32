@@ -63,6 +63,11 @@ int main()
 
         printf("done loading - %u and %u and %u and %u and %u and %u and %u and %u\n", numA.a[7], numA.a[6], numA.a[5], numA.a[4], numA.a[3], numA.a[2], numA.a[1], numA.a[0]);
 
+        numA = ReducedRepresentation(numA);
+
+        printf("reduced representation - %u and %u and %u and %u and %u and %u and %u and %u and %u and %u\n", numA.a[9], numA.a[8], numA.a[7], numA.a[6], numA.a[5], numA.a[4], numA.a[3], numA.a[2], numA.a[1], numA.a[0]);
+
+
         // Edit limbs to create non-zero numbers
         //numA.a[0] = 0b11000000000000000000000000;
         //numB.a[0] = 0b01000000000000000000000011;
