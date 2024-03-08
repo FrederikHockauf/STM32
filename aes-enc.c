@@ -88,6 +88,7 @@ int main()
 	printf("From device - Another check\n");
 
 	WriteBlock(key);
+	WriteBlock(message);
 
 	//printf("From device - Done readingn\n");
 	hal_led_off();
