@@ -52,8 +52,8 @@ for i in range(10):
 
   print("Flag 8 - Received sumthin'")
 
-  print(f"dev = {a_back}")
-  print(f"oth = {a}")
+  print(f"dev = {bin(a_back)}")
+  print(f"oth = {bin(a)}")
 
   print("Flag 9 - Comparisons'")
 
