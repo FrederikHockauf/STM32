@@ -29,9 +29,10 @@ for i in range(10):
   print("Flag 3 - writing data")
   # send key and data to device
   a = 127
-  dev.write(a)
+  dev.write(key)
 
   print("Flag 4 - sent data")
+  print(int.from_bytes(key, "big"))
 
   x = dev.readline()
   print("Flag 5 - Read something")
