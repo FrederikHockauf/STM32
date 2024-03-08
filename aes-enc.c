@@ -63,7 +63,6 @@ int main()
 
 	printf("From device - This works?\n");
 
-	hal_led_off();
 	uint8_t alle = Read4Bytes();
 	uint8_t alle2 = Read4Bytes();
 

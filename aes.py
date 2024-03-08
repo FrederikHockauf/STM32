@@ -34,20 +34,28 @@ for i in range(10):
 
   print("Flag 3 - writing data")
   # send key and data to device
-  inte = 16
+  a = 16
+  b = 5
+  c = 37
+  d = 137
 
-  print(f"inte = {sys. getsizeof(inte)}")
-  print(f"thinke = {sys. getsizeof(thinke)}")
-  print(f"key = {sys. getsizeof(key)}")
-  print(f"data = {sys. getsizeof(data)}")
-  print(f"[display] key = {key}")
-  print(f"[display] data = {data}")
-  print(f"[display] inte = {inte}")
-  print(f"[display - b] inte = {bin(inte)}")
-  print(f"[display - n] thinke = {thinke}")
-  print(f"[display - n] thinke2 = {thinke2}")
-  print(f"[display - n] thinke3 = {thinke3}")
-  print(f"[display - n] thinke4 = {thinke4}")
+  print(f"a = {a}")
+  print(f"b = {b}")
+  print(f"c = {c}")
+  print(f"d = {d}\n")
+
+  print(f"[w] a = {a}")
+  dev.write(a)
+  print(f"[r] a = {dev.read(4)}")
+  print(f"[w] b = {b}")
+  dev.write(b)
+  print(f"[r] b = {dev.read(4)}")
+  print(f"[w] c = {c}")
+  dev.write(c)
+  print(f"[r] c = {dev.read(4)}")
+  print(f"[w] d = {d}")
+  dev.write(d)
+  print(f"[r] d = {dev.read(4)}")
 
   dev.write(thinke)
 
