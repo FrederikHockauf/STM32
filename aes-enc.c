@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
-//#include <stdio.h>
 
 // The number of AES rounds to be performed. Does not actually support 12 or 14 rounds currently
 const int ROUNDS = 10;
