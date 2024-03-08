@@ -40,13 +40,24 @@ for i in range(10):
   print(x.decode()) # 
   print("Flag 6 - We've printed it")
 
+  sent_key = dev.read(16)
+  sent_message = dev.read(16)
+  print("Flag 7 - got data back")
+
+  for i in range(16):
+    print(f"\n----\nround {i}")
+    print(f"dev = {sent_key[i]}")
+    print(f"oth = {key[i]}")
+  
+
+  print("Flag 8 - done printing that")
 
 
-  print("Flag 7 - reading data")
+  print("Flag 9 - reading data")
 
   # read cipher text from device
   ciphertext_dev = dev.read(16)
-  print("Flag 8 - done reading data")
+  print("Flag 10 - done reading data")
 
   # generate reference cipher block
   cipher = AES.new(key, AES.MODE_ECB)

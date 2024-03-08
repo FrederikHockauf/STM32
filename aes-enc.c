@@ -80,13 +80,14 @@ int main()
 	//printf("a = %u and %u and %u and %u \n", v1, v2, v3, v4);
 	//uint8_t alle = Read4Bytes();
 	//uint8_t alle2 = Read4Bytes();
-	
+
     // Read the data from the computer
     ReadBlock(key);
     ReadBlock(message);
 
 	printf("From device - Another check\n");
 
+	WriteBlock(key);
 
 	//printf("From device - Done readingn\n");
 	hal_led_off();
