@@ -58,6 +58,7 @@ for i in range(10):
     print(f"dev = {ciphertext_dev[i]}")
     print(f"oth = {ciphertext_rev[i]}")
     if ciphertext_dev[i] != ciphertext_rev[i]:
+      pass
       #print("\n----\nround 1")
       #print(f"dev = {ciphertext_dev[i]}")
       #print(f"oth = {ciphertext_rev[i]}")
