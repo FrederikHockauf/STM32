@@ -10,27 +10,24 @@ TARGETS = demo.hex ecdh25519_io_test.elf
 all: $(TARGETS)
 
 include config.mk
-include ecdh25519/ecdh25519.mk
 
 # For each target define a TARGETNAME_SRC, TARGETNAME_OBJ and define any
 # additional dependencies for your the target TARGETNAME.elf file (just
 # define the dependencies, a generic rule for .elf target exists in
 # config.mk).
-CALCULATOR_SRC = ecdh25519/io_test.c
-
+DEMO_SRC = demo.c
 ifeq ($(TARGET),stm32f4)
-  CALCULATOR_SRC += demo.S # <-------------------- Change this away from the demo
+  DEMO_SRC += demo.S
 endif
+DEMO_OBJ = $(call objs,$(DEMO_SRC))
+demo.elf: $(DEMO_OBJ) libhal.a
 
-CALCULTATOR_OBJ = $(call objs,$(CALCULATOR_SRC))
 
-demo.elf: $(CALCULTATOR_OBJ) libhal.a
+include ecdh25519/ecdh25519.mk
 
 
 # Don't forget to add all objects to the OBJ variable
-OBJ += $(CALCULTATOR_OBJ) # <-------------------- Check this works
-OBJ += $(CALCULTATOR_OBJ)
-OBJ += $(CALCULTATOR_OBJ)
+OBJ += $(DEMO_OBJ)
 
 # Include generated dependencies
 -include $(filter %.d,$(OBJ:.o=.d))
