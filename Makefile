@@ -21,8 +21,8 @@ ifeq ($(TARGET),stm32f4)
   DEMO_SRC += demo.S
 endif
 DEMO_OBJ = $(call objs,$(DEMO_SRC))
-demo.elf: $(DEMO_OBJ) libhal.a
-
+#demo.elf: $(DEMO_OBJ) libhal.a
+ecdh25519_io_test.elf: $(ECDH25519_IO_TEST_OBJ) libhal.a
 
 # Don't forget to add all objects to the OBJ variable
 #OBJ += $(DEMO_OBJ)
