@@ -253,8 +253,7 @@ int512 MPASchoolbookMultiplication(int512 operand1, int512 operand2)
 
         }
     }
-
-
+    
 	return result;
 }
 

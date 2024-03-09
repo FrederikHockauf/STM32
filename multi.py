@@ -38,6 +38,8 @@ for i in range(10):
 
   a = random.randint(0, 1<<256-1)
   b = random.randint(0, 1<<256-1)
+  a = 10
+  b = 7
   #print(f"a = {a}")
   #print(f"b = {b}")
   #print(f"a binary = {bin(a)}")
