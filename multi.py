@@ -69,6 +69,8 @@ for i in range(10):
 
     if opcodes[opc] == "MUL":
       print("Flag  9 - MUL")
+      print(f"res = {res}")
+      print(f"oth = {a*b}")
       print((a*b) == res, end =" ")
 
     #print("Flag  10 - Done with calcs")
