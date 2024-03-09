@@ -299,10 +299,13 @@ int512 Zero512()
 
 int512 ToInt512(int256 number)
 {
-	int512 newNumber = Zero512();
+	int512 newNumber;
 
 	for (int i = 0; i < TOTAL_LIMBS; i++)
 		newNumber.a[i] = number.a[i];
+
+    for (int i = TOTAL_LIMBS; i < (TOTAL_LIMBS * 2); i++)
+		newNumber.a[i] = 0;
     
     return newNumber;
 }
