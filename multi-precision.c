@@ -85,7 +85,7 @@ int main()
 
         // Send back the result opcode and the result
         hal_putchar(opcode);
-        WriteInt512(result);
+        WriteInt512(expandedNumA);
 
         // Send back the time opcode and the time
         uint8_t timeOpcode = 5;
