@@ -247,7 +247,7 @@ int512 MPASchoolbookMultiplication(int512 operand1, int512 operand2)
             uint32_t mask = 1 << place;
             if ((reducedOperand2.a[limb] & mask) != 0)
             {
-                uint8_t currentPlacement = limb * RADIX + place;
+                uint8_t currentPlacement = limb * (RADIX - 1) + place;
                 result = MPAAdd(result, MPABitshiftLeft(reducedOperand1, currentPlacement));
                 result = ReducedRepresentation(result);
             }
