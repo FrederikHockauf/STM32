@@ -54,6 +54,8 @@ int main(void)
 
   uint64_t t_start = 0, t_stop = 0;
 
+  printf("Hello from the dark side\n");
+
   while(1) {
     unsigned char opc;
 

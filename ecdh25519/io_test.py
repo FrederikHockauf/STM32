@@ -78,6 +78,11 @@ def fe_mul(a, b, print_time=False):
 
 print("Flag - Before fsq")
 
+x = dev.readline()
+print("Flag 1 - Read something")
+print(x.decode()) # 
+print("Flag 2 - We've printed it")
+
 if 'fsq' in tests:
   for i in range(10):
     a = random.randint(0, (1<<255)-19)
