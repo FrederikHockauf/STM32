@@ -72,7 +72,7 @@ int main()
             timeStart = hal_get_time();
 			result = MPABitshiftLeft(expandedNumA, rounds);
             //result = MPASchoolbookMultiplication(expandedNumA, expandedNumB);
-            result = ReducedRepresentation(result);
+            //result = ReducedRepresentation(result);
             //result = Karatsuba(expandedNumA, expandedNumB, TOTAL_BITS);
             timeStop = hal_get_time();
         }
