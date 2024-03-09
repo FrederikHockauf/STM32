@@ -5,7 +5,7 @@ ifdef SRCDIR
 VPATH = $(SRCDIR)
 
 # Add your targets here
-TARGETS = demo.hex
+TARGETS = demo.hex ecdh25519_io_test.elf
 
 all: $(TARGETS)
 
@@ -29,6 +29,8 @@ demo.elf: $(CALCULTATOR_OBJ) libhal.a
 
 # Don't forget to add all objects to the OBJ variable
 OBJ += $(CALCULTATOR_OBJ) # <-------------------- Check this works
+OBJ += $(CALCULTATOR_OBJ)
+OBJ += $(CALCULTATOR_OBJ)
 
 # Include generated dependencies
 -include $(filter %.d,$(OBJ:.o=.d))
