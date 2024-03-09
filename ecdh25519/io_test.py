@@ -76,6 +76,7 @@ def fe_mul(a, b, print_time=False):
 
   return p
 
+print("Flag - Before fsq")
 
 if 'fsq' in tests:
   for i in range(10):
@@ -92,6 +93,7 @@ if 'fsq' in tests:
 
   print()
 
+print("Flag - Before fmul")
 
 if 'fmul' in tests:
   for i in range(10):
