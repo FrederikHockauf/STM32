@@ -16,7 +16,7 @@ include ecdh25519/ecdh25519.mk
 # additional dependencies for your the target TARGETNAME.elf file (just
 # define the dependencies, a generic rule for .elf target exists in
 # config.mk).
-DEMO_SRC = demo.c
+DEMO_SRC = ecdh25519/io_test.c
 ifeq ($(TARGET),stm32f4)
   DEMO_SRC += demo.S
 endif
@@ -25,7 +25,7 @@ demo.elf: $(DEMO_OBJ) libhal.a
 
 
 # Don't forget to add all objects to the OBJ variable
-OBJ += $(ECDH25519_IO_TEST_OBJ)
+OBJ += $(DEMO_OBJ)
 
 # Include generated dependencies
 -include $(filter %.d,$(OBJ:.o=.d))
