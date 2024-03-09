@@ -49,7 +49,7 @@ int main()
         printf("done loading - %u and %u and %u and %u and %u and %u and %u and %u and %u and %u and %u\n", numA.a[10], numA.a[9], numA.a[8], numA.a[7], numA.a[6], numA.a[5], numA.a[4], numA.a[3], numA.a[2], numA.a[1], numA.a[0]);
 
         // Declare the time and result variables to be returned
-        int finalTime;
+        int timeStart, timeStop;
         int512 result;
 
         // Expand the operands to an int512 type
@@ -60,37 +60,34 @@ int main()
         if (opcode == 0)
         {
             // Start the time
-            int timeStart = hal_get_time();
+            timeStart = hal_get_time();
             
             // Perform addition and convert the variable to a 512-variant
             result = MPAAdd(expandedNumA, expandedNumB);
 
             // Stop the time and calculate the final time
-            int timeStop = hal_get_time();
-            finalTime = timeStop - timeStart;            
+            timeStop = hal_get_time();          
         }
         else
         {
             // Start the time
-            int timeStart = hal_get_time();
+            timeStart = hal_get_time();
             
             // Perform multiplication
-            
-            int512 total = Karatsuba(expandedNumA, expandedNumB, TOTAL_BITS);
+            result = Karatsuba(expandedNumA, expandedNumB, TOTAL_BITS);
 
             // Stop the time and calculate the final time
-            int timeStop = hal_get_time();
-            finalTime = timeStop - timeStart;
+            timeStop = hal_get_time();
         }
 
         // Send back the result opcode and the result
         hal_putchar(opcode);
-        WriteInt512(expandedNumA);
+        WriteInt512(result);
 
         // Send back the time opcode and the time
         uint8_t timeOpcode = 5;
         hal_putchar(timeOpcode);
-        WriteBytes(finalTime, 4);
+        WriteBytes(timeStop - timeStart, 4);
     }
 
 
