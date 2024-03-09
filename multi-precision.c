@@ -70,7 +70,7 @@ int main()
         {
             // Perform multiplication
             timeStart = hal_get_time();
-			result = MPABitshiftLeft(expandedNumA, 3);
+			result = MPABitshiftLeft(MPABitshiftRight(MPABitshiftLeft(expandedNumA, 3), 3), 3);
             //result = MPASchoolbookMultiplication(expandedNumA, expandedNumB);
             result = ReducedRepresentation(result);
             //result = Karatsuba(expandedNumA, expandedNumB, TOTAL_BITS);
