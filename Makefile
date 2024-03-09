@@ -19,6 +19,7 @@ include ecdh25519/ecdh25519.mk
 DEMO_SRC = ecdh25519/io_test.c
 ifeq ($(TARGET),stm32f4)
   DEMO_SRC += demo.S
+  DEMO_SRC += ecdh25519/fe25519.c
 endif
 DEMO_OBJ = $(call objs,$(DEMO_SRC))
 demo.elf: $(DEMO_OBJ) libhal.a
