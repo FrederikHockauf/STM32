@@ -10,6 +10,7 @@ TARGETS = demo.hex ecdh25519_io_test.elf
 all: $(TARGETS)
 
 include config.mk
+include ecdh25519/ecdh25519.mk
 
 # For each target define a TARGETNAME_SRC, TARGETNAME_OBJ and define any
 # additional dependencies for your the target TARGETNAME.elf file (just
@@ -23,7 +24,6 @@ DEMO_OBJ = $(call objs,$(DEMO_SRC))
 demo.elf: $(DEMO_OBJ) libhal.a
 
 
-include ecdh25519/ecdh25519.mk
 
 
 # Don't forget to add all objects to the OBJ variable
