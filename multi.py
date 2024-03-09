@@ -18,7 +18,7 @@ opcodes = {
 
 print("Starting calculations")
 
-for i in range(10):
+for i in range(45):
   x = dev.readline()
   #print("Flag 1 - Read something")
   print(x.decode()) # 
@@ -41,7 +41,7 @@ for i in range(10):
   b = random.randint(0, 1<<256-1)
   a = 0b0000000000000000000000000001
   b = 0b1000000000000000000000000000000000000000000000000000000
-  b = 1 << (i*5)
+  b = 1 << (i)
   #print(f"a = {a}")
   #print(f"b = {b}")
   #print(f"a binary = {bin(a)}")
@@ -73,7 +73,7 @@ for i in range(10):
 
     if opcodes[opc] == "MUL":
       print("Flag  9 - MUL")
-      print(f"limb = {int(i*5/23)}")
+      print(f"limb = {int(i)}")
       print(f"  a = {bin(a)}")
       print(f"  b = {bin(b)}")
       print(f"res = {bin(res)}")
