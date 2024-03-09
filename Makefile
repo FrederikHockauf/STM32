@@ -22,12 +22,11 @@ ifeq ($(TARGET),stm32f4)
 endif
 DEMO_OBJ = $(call objs,$(DEMO_SRC))
 demo.elf: $(DEMO_OBJ) libhal.a
-ecdh25519_io_test.elf: $(ECDH25519_IO_TEST_OBJ) libhal.a
-
 
 
 # Don't forget to add all objects to the OBJ variable
 OBJ += $(DEMO_OBJ)
+OBJ += $(ECDH25519_IO_TEST_OBJ)
 
 # Include generated dependencies
 -include $(filter %.d,$(OBJ:.o=.d))
