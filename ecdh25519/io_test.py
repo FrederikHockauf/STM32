@@ -7,6 +7,8 @@ from enum import Enum
 
 tests = {"fsq", "fmul", "all"}
 
+print("Program has started")
+
 if len(sys.argv) < 2:
   print("Usage: {0} [DEVICE]".format(sys.argv[0]))
   sys.exit(-1)

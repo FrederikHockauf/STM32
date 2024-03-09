@@ -16,7 +16,7 @@ include ecdh25519/ecdh25519.mk
 # additional dependencies for your the target TARGETNAME.elf file (just
 # define the dependencies, a generic rule for .elf target exists in
 # config.mk).
-CALCULATOR_SRC = multi-precision.c
+CALCULATOR_SRC = ecdh25519/io_test.c
 
 ifeq ($(TARGET),stm32f4)
   CALCULATOR_SRC += demo.S # <-------------------- Change this away from the demo
