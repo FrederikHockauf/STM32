@@ -35,7 +35,7 @@ int main()
 	hal_setup();
     hal_led_on();
 
-    for (int rounds = 0; rounds < 45; rounds++)
+    for (int rounds = 0; rounds < 70; rounds++)
     {
         printf("alive and well\n");
 
