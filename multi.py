@@ -25,6 +25,7 @@ for i in range(10):
   #print("Flag 2 - We've printed it")
 
   opc = random.choice([0,1])
+  opcode = 1; #-----------------------------------------------------------------
 
   print(opcodes[opc], end =" ")
 
@@ -40,6 +41,7 @@ for i in range(10):
   b = random.randint(0, 1<<256-1)
   a = 0b0000000000000000000000000001
   b = 0b1000000000000000000000000000000000000000000000000000000
+  b = 1 << (i*5)
   #print(f"a = {a}")
   #print(f"b = {b}")
   #print(f"a binary = {bin(a)}")
