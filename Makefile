@@ -10,6 +10,7 @@ TARGETS = demo.hex
 all: $(TARGETS)
 
 include config.mk
+include ecdh25519/ecdh25519.mk
 
 # For each target define a TARGETNAME_SRC, TARGETNAME_OBJ and define any
 # additional dependencies for your the target TARGETNAME.elf file (just
