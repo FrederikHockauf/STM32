@@ -57,9 +57,6 @@ int main()
         int512 expandedNumA = ToInt512(numA);
         int512 expandedNumB = ToInt512(numB);
 
-        WriteInt512(expandedNumA);
-        WriteInt512(expandedNumB);
-
         // Perform either addition (0) or multiplication (1)
         if (opcode == 0)
         {
@@ -73,7 +70,9 @@ int main()
         {
             // Perform multiplication
             timeStart = hal_get_time();
-            result = Karatsuba(expandedNumA, expandedNumB, TOTAL_BITS);
+            result = MPASchoolbookMultiplication(expandedNumA, expandedNumB);
+            result = ReducedRepresentation(result);
+            //result = Karatsuba(expandedNumA, expandedNumB, TOTAL_BITS);
             timeStop = hal_get_time();
         }
 
