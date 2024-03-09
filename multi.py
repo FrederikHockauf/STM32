@@ -19,6 +19,7 @@ opcodes = {
 print("Starting calculations")
 
 for i in range(45):
+  print("\n-----")
   x = dev.readline()
   #print("Flag 1 - Read something")
   print(x.decode()) # 
