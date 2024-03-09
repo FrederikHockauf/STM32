@@ -249,11 +249,12 @@ int512 MPASchoolbookMultiplication(int512 operand1, int512 operand2)
             {
                 uint8_t currentPlacement = limb * RADIX + place;
                 result = MPAAdd(result, MPABitshiftLeft(reducedOperand1, currentPlacement));
+                result = ReducedRepresentation(result);
             }
 
         }
     }
-    
+
 	return result;
 }
 
