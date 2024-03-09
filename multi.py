@@ -52,6 +52,14 @@ for i in range(10):
   print(x.decode()) # 
   #print("Flag 7 - We've printed it")
 
+  new_a = int.from_bytes(dev.read(64), 'big')
+  new_b = int.from_bytes(dev.read(64), 'big')
+  print("Flag X - Read the new ones")
+  print(f"[dev] a = {new_a}")
+  print(f"[oth] a = {a}")
+  print(f"[dev] b = {new_b}")
+  print(f"[oth] b = {b}")
+
   ret = int.from_bytes(dev.read(1), 'big')
 
   #print("Flag 8 - Gotten opcode back")

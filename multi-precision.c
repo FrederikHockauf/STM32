@@ -46,7 +46,8 @@ int main()
         int256 numA = ReadInt256();
         int256 numB = ReadInt256();
 
-        printf("done loading - %u and %u and %u and %u and %u and %u and %u and %u and %u and %u and %u\n", numA.a[10], numA.a[9], numA.a[8], numA.a[7], numA.a[6], numA.a[5], numA.a[4], numA.a[3], numA.a[2], numA.a[1], numA.a[0]);
+        //printf("done loading - %u and %u and %u and %u and %u and %u and %u and %u and %u and %u and %u\n", numA.a[10], numA.a[9], numA.a[8], numA.a[7], numA.a[6], numA.a[5], numA.a[4], numA.a[3], numA.a[2], numA.a[1], numA.a[0]);
+        printf("\n");
 
         // Declare the time and result variables to be returned
         int timeStart, timeStop;
@@ -56,27 +57,22 @@ int main()
         int512 expandedNumA = ToInt512(numA);
         int512 expandedNumB = ToInt512(numB);
 
+        WriteInt512(expandedNumA);
+        WriteInt512(expandedNumB);
+
         // Perform either addition (0) or multiplication (1)
         if (opcode == 0)
         {
-            // Start the time
+            // Perform addition
             timeStart = hal_get_time();
-            
-            // Perform addition and convert the variable to a 512-variant
             result = MPAAdd(expandedNumA, expandedNumB);
-
-            // Stop the time and calculate the final time
             timeStop = hal_get_time();          
         }
         else
         {
-            // Start the time
-            timeStart = hal_get_time();
-            
             // Perform multiplication
+            timeStart = hal_get_time();
             result = Karatsuba(expandedNumA, expandedNumB, TOTAL_BITS);
-
-            // Stop the time and calculate the final time
             timeStop = hal_get_time();
         }
 
