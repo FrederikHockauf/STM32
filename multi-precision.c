@@ -35,7 +35,7 @@ int main()
 	hal_setup();
     hal_led_on();
 
-    for (int rounds = 0; rounds < 70; rounds++)
+    for (int rounds = 0; rounds < 10; rounds++)
     {
         printf("alive and well\n");
 
@@ -70,7 +70,6 @@ int main()
         {
             // Perform multiplication
             timeStart = hal_get_time();
-			//result = MPABitshiftLeft(expandedNumA, rounds);
             result = MPASchoolbookMultiplication(expandedNumA, expandedNumB);
             result = ReducedRepresentation(result);
             //result = Karatsuba(expandedNumA, expandedNumB, TOTAL_BITS);
