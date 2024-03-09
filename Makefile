@@ -25,7 +25,7 @@ demo.elf: $(DEMO_OBJ) libhal.a
 
 
 # Don't forget to add all objects to the OBJ variable
-OBJ += $(DEMO_OBJ)
+#OBJ += $(DEMO_OBJ)
 OBJ += $(ECDH25519_IO_TEST_OBJ)
 
 # Include generated dependencies
