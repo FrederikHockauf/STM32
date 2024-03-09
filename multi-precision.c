@@ -66,6 +66,7 @@ int main()
             // Perform addition
             timeStart = hal_get_time();
             result = MPAAdd(expandedNumA, expandedNumB);
+            result = ReducedRepresentation(result);
             timeStop = hal_get_time();          
         }
         else

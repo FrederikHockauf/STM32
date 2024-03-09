@@ -59,6 +59,8 @@ for i in range(10):
   print(f"[oth] a = {a}")
   print(f"[dev] b = {new_b}")
   print(f"[oth] b = {b}")
+  print(f"a diff = {a - new_a}")
+  print(f"b diff = {b - new_b}")
 
   ret = int.from_bytes(dev.read(1), 'big')
 
