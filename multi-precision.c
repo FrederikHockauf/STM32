@@ -7,14 +7,14 @@ typedef struct { int32_t a[11]; } int256;
 typedef struct { int32_t a[22]; } int512;
 const uint16_t TOTAL_BITS = 512;
 const uint16_t TOTAL_LIMBS = 11;
-const uint8_t INT_BITS = 31; // Sign takes one bit
+const uint8_t INT_BITS = 32; // Sign takes one bit
 const uint8_t RADIX = 24;
 
 int512 Karatsuba(int512 a, int512 b, int bits);
 int512 MPAAdd(int512 operand1, int512 operand2);
 int512 MPASubtraction(int512 operand1, int512 operand2);
-int512 MPABitshiftLeft(int512 number, int places);
-int512 MPABitshiftRight(int512 number, int places);
+int512 MPABitshiftLeft(int512 number, int places, int bitSize);
+int512 MPABitshiftRight(int512 number, int places, int bitSize);
 int512 MPASchoolbookMultiplication(int512 operand1, int512 operand2);
 int512 MPAAbsoluteValue(int512 number);
 int512 ReducedRepresentation(int512 number);
@@ -70,9 +70,9 @@ int main()
         {
             // Perform multiplication
             timeStart = hal_get_time();
-			result = MPABitshiftLeft(expandedNumA, rounds);
-            //result = MPASchoolbookMultiplication(expandedNumA, expandedNumB);
-            //result = ReducedRepresentation(result);
+			//result = MPABitshiftLeft(expandedNumA, rounds);
+            result = MPASchoolbookMultiplication(expandedNumA, expandedNumB);
+            result = ReducedRepresentation(result);
             //result = Karatsuba(expandedNumA, expandedNumB, TOTAL_BITS);
             timeStop = hal_get_time();
         }
@@ -102,10 +102,10 @@ int512 Karatsuba(int512 a, int512 b, int bits)
 	int512 result = Zero512();
 
 	// Split the numbers into highs and lows through bitshifting
-	int512 aHigh = MPABitshiftRight(a, bitsSection);
-	int512 bHigh = MPABitshiftRight(b, bitsSection);
-	int512 aLow = MPABitshiftRight(MPABitshiftLeft(a, TOTAL_BITS - bitsSection), TOTAL_BITS - bitsSection);
-	int512 bLow = MPABitshiftRight(MPABitshiftLeft(b, TOTAL_BITS - bitsSection), TOTAL_BITS - bitsSection);
+	int512 aHigh = MPABitshiftRight(a, bitsSection, 32);
+	int512 bHigh = MPABitshiftRight(b, bitsSection, 32);
+	int512 aLow = MPABitshiftRight(MPABitshiftLeft(a, TOTAL_BITS - bitsSection, 32), TOTAL_BITS - bitsSection, 32);
+	int512 bLow = MPABitshiftRight(MPABitshiftLeft(b, TOTAL_BITS - bitsSection, 32), TOTAL_BITS - bitsSection, 32);
 
 	// Declare and initialize components to be used in the final calculation
 	int512 high;
@@ -132,7 +132,7 @@ int512 Karatsuba(int512 a, int512 b, int bits)
 	}
 
 	// Constant time (?) comparison between medium and mediumHat to determine if it should be negated
-	int t;
+	int t = 0;
 	for (int i = 0; i < (TOTAL_LIMBS * 2); i++)
 		if (medium.a[i] == mediumHat.a[i])
 			t += 0;
@@ -141,17 +141,18 @@ int512 Karatsuba(int512 a, int512 b, int bits)
 
 	// Pick the medium value to use
 	int512 mediumType;
-    if (t == 0)
-        mediumType = medium;
-    else
-        mediumType = mediumHat;
+	if (t == 0)
+		mediumType = medium;
+	else
+		mediumType = mediumHat;
 
 	// Calculate the result
 	int512 parenthisSum = MPASubtraction(MPAAdd(low, high), mediumType);
-	result = MPAAdd(MPAAdd(low, MPABitshiftLeft(parenthisSum, bits / 2)), MPABitshiftLeft(high, bits));
+	result = MPAAdd(MPAAdd(low, MPABitshiftLeft(parenthisSum, bits / 2, 32)), MPABitshiftLeft(high, bits, 32));
 
 	return result;
 }
+
 
 int512 MPAAdd(int512 operand1, int512 operand2)
 {
@@ -176,86 +177,107 @@ int512 MPASubtraction(int512 operand1, int512 operand2)
 	return result;
 }
 
-int512 MPABitshiftLeft(int512 number, int places)
+int512 MPABitshiftLeft(int512 number, int places, int bitSize)
 {
 	// If we want to shift by more places than in a limb, we shift by the size of a limb and save the places left to shift with
 	int remainingPlaces = places;
-	if (remainingPlaces > RADIX)
-		places = RADIX;
+	if (remainingPlaces > bitSize)
+		places = bitSize;
 	remainingPlaces -= places;
 
-	// Just shift the bottom-most limb as we don't need to save anything
-	number.a[(TOTAL_LIMBS * 2) - 1] <<= places;
-
-	for (int i = (TOTAL_LIMBS * 2) - 2; i >= 0; i--)
+	// If we shift by the bit size of the limb, we just copy by all of the limbs from each other, except the first that will now be 0. If not we do it more deliberately
+	if (places == bitSize)
 	{
-		// Find the portion of the i'th limb that will get deleted and save it
-		uint32_t mask = (((1 << RADIX) - 1) >> (RADIX - places)) << (RADIX - places);
-		uint32_t carryOver = number.a[i] & mask;
+		for (int i = (TOTAL_LIMBS * 2) - 2; i >= 1; i--)
+			number.a[i] = number.a[i - 1];
+		number.a[0] = 0;
+	}
+	else
+	{
+		// Just shift the bottom-most limb as we don't need to save anything
+		number.a[(TOTAL_LIMBS * 2) - 1] <<= places;
 
-		// Add the saved portion to the limb above and shift the limb itself
-		number.a[i + 1] ^= carryOver >> (RADIX - places);
-		number.a[i] <<= places;
+		for (int i = (TOTAL_LIMBS * 2) - 2; i >= 0; i--)
+		{
+			// Find the portion of the i'th limb that will get deleted and save it
+			uint32_t mask = ((~0) >> (bitSize - places)) << (bitSize - places);
+			uint32_t carryOver = number.a[i] & mask;
+
+			// Add the saved portion to the limb above and shift the limb itself (but mask out the unwanted right side)
+			number.a[i + 1] ^= carryOver >> (bitSize - places);
+			number.a[i] = (number.a[i] << places) & ((1 << bitSize) - 1);
+		}
 	}
 
 	// In the case where we still have more places to shift with, we call this function recursively
 	if (remainingPlaces > 0)
-		number = MPABitshiftLeft(number, remainingPlaces);
+		number = MPABitshiftLeft(number, remainingPlaces, bitSize);
 
 	return number;
 }
 
-int512 MPABitshiftRight(int512 number, int places)
+int512 MPABitshiftRight(int512 number, int places, int bitSize)
 {
 	// If we want to shift by more places than in a limb, we shift by the size of a limb and save the places left to shift with
 	int remainingPlaces = places;
-	if (remainingPlaces > RADIX)
-		places = RADIX;
+	if (remainingPlaces > bitSize)
+		places = bitSize;
 	remainingPlaces -= places;
 
-	// Just shift the bottom-most limb as we don't need to save anything
-	number.a[0] >>= places;
-
-	for (int i = 1; i < (TOTAL_LIMBS * 2); i++)
+	// If we shift by the bit size of the limb, we just copy by all of the limbs from each other, except the last that will now be 0. If not we do it more deliberately
+	if (places == bitSize)
 	{
-		// Find the portion of the i'th limb that will get deleted and save it
-		uint32_t mask = (1 << places) - 1;
-		uint32_t carryOver = number.a[i] & mask;
+		for (int i = 0; i < (TOTAL_LIMBS * 2) - 1; i++)
+			number.a[i] = number.a[i + 1];
+		number.a[(TOTAL_LIMBS * 2) - 1] = 0;
+	}
+	else
+	{
+		// Just shift the bottom-most limb as we don't need to save anything
+		number.a[0] >>= places;
 
-		// Add the saved portion to the limb below and shift the limb itself
-		number.a[i - 1] ^= carryOver << (RADIX - places);
-		number.a[i] >>= places;
+		for (int i = 1; i < (TOTAL_LIMBS * 2); i++)
+		{
+			// Find the portion of the i'th limb that will get deleted and save it
+			uint32_t mask = (1 << places) - 1;
+			uint32_t carryOver = number.a[i] & mask;
+
+			// Add the saved portion to the limb below and shift the limb itself
+			number.a[i - 1] ^= carryOver << (bitSize - places);
+			number.a[i] >>= places;
+		}
+
 	}
 
 	// In the case where we still have more places to shift with, we call this function recursively
 	if (remainingPlaces > 0)
-		number = MPABitshiftRight(number, remainingPlaces);
+		number = MPABitshiftRight(number, remainingPlaces, bitSize);
 
 	return number;
 }
 
 int512 MPASchoolbookMultiplication(int512 operand1, int512 operand2)
 {
-    int512 reducedOperand1 = ReducedRepresentation(operand1);
-    int512 reducedOperand2 = ReducedRepresentation(operand2);
-    int512 result = Zero512();
+	int512 reducedOperand1 = ReducedRepresentation(operand1);
+	int512 reducedOperand2 = ReducedRepresentation(operand2);
+	int512 result = Zero512();
 
 	// Set the result to be the limb-wise schoolbook multiplication of the operands
 	for (int limb = 0; limb < (TOTAL_LIMBS * 2); limb++)
-    {
-        for (int place = 0; place < RADIX; place++)
-        {
-            uint32_t mask = 1 << place;
-            if ((reducedOperand2.a[limb] & mask) != 0)
-            {
-                uint8_t currentPlacement = limb * RADIX + place;
-                result = MPAAdd(result, MPABitshiftLeft(reducedOperand1, currentPlacement));
-                result = ReducedRepresentation(result);
-            }
+	{
+		for (int place = 0; place < RADIX; place++)
+		{
+			uint32_t mask = 1 << place;
+			if ((reducedOperand2.a[limb] & mask) != 0)
+			{
+				uint8_t currentPlacement = limb * RADIX + place;
+				result = MPAAdd(result, MPABitshiftLeft(reducedOperand1, currentPlacement, RADIX));
+				result = ReducedRepresentation(result);
+			}
 
-        }
-    }
-    
+		}
+	}
+
 	return result;
 }
 
@@ -304,10 +326,10 @@ int512 ToInt512(int256 number)
 	for (int i = 0; i < TOTAL_LIMBS; i++)
 		newNumber.a[i] = number.a[i];
 
-    for (int i = TOTAL_LIMBS; i < (TOTAL_LIMBS * 2); i++)
+	for (int i = TOTAL_LIMBS; i < (TOTAL_LIMBS * 2); i++)
 		newNumber.a[i] = 0;
-    
-    return newNumber;
+
+	return newNumber;
 }
 
 int ReadBytes(int bytes)
