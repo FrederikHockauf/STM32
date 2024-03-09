@@ -60,7 +60,7 @@ for i in range(10):
 
   #print("Flag 8 - Gotten opcode back")
 
-
+  print(f"round = {i}")
   if opcodes[ret] != "ERR":
     res = int.from_bytes(dev.read(64), 'big')
    
@@ -73,8 +73,11 @@ for i in range(10):
 
     if opcodes[opc] == "MUL":
       print("Flag  9 - MUL")
-      print(f"res = {res}")
-      print(f"oth = {a*b}")
+      print(f"limb = {int(i*5/23)}")
+      print(f"  a = {bin(a)}")
+      print(f"  b = {bin(b)}")
+      print(f"res = {bin(res)}")
+      print(f"oth = {bin(a*b)}")
       print((a*b) == res, end =" ")
 
     #print("Flag  10 - Done with calcs")
