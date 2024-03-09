@@ -235,10 +235,25 @@ int512 MPABitshiftRight(int512 number, int places)
 
 int512 MPASchoolbookMultiplication(int512 operand1, int512 operand2)
 {
+    int512 reducedOperand1 = ReducedRepresentation(operand1);
+    int512 reducedOperand2 = ReducedRepresentation(operand2);
+    int512 result = Zero512();
+
 	// Set the result to be the limb-wise schoolbook multiplication of the operands
-	int512 result;
-	for (int i = 0; i < (TOTAL_LIMBS * 2); i++)
-		result.a[i] = operand1.a[i] * operand2.a[i];
+	for (int limb = 0; limb < (TOTAL_LIMBS * 2); limb++)
+    {
+        for (int place = 0; place < RADIX; place++)
+        {
+            uint32_t mask = 1 << place;
+            if ((reducedOperand2.a[limb] & mask) != 0)
+            {
+                uint8_t currentPlacement = limb * RADIX + place;
+                result = MPAAdd(result, MPABitshiftLeft(reducedOperand1, currentPlacement));
+            }
+
+        }
+    }
+
 
 	return result;
 }
