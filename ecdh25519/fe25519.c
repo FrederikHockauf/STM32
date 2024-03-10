@@ -214,7 +214,7 @@ void fe25519_mul(fe25519 *r, const fe25519 *x, const fe25519 *y)
 
 void fe25519_square(fe25519 *r, const fe25519 *x)
 {
-    c_sqaure(r, x, x);
+    c_square(r, x, x);
     //fe25519_mul(r, x, x);
 }
 
