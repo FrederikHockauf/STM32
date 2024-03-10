@@ -294,7 +294,7 @@ void c_mul(fe25519* r, const fe25519* x, const fe25519* y)
 	middle_prod_hat[0] += 1;
 
 	// Determine whether to use the middle product or negated middle product 
-	bool negate = (middle_x_diff[31] & (~mask)) ^ (middle_y_diff[31] & (~mask));
+	int negate = (middle_x_diff[31] & (~mask)) ^ (middle_y_diff[31] & (~mask));
 	for (i = 0; i < 16; i++)
 		middle_prod[i] = (middle_prod[i] * negate) + (middle_prod_hat[i] * (1 - negate));
 
