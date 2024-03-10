@@ -36,7 +36,7 @@ int crypto_scalarmult_base(unsigned char *pk, const unsigned char *sk)
 int c_crypto_scalarmult(unsigned char *ss, const unsigned char *sk, const unsigned char *pk)
 {
   group_ge p, k;
-  int i,j;
+  int i,j,l;
 
   if(group_ge_unpack(&p, pk)) return -1;
 
@@ -57,7 +57,7 @@ int c_crypto_scalarmult(unsigned char *ss, const unsigned char *sk, const unsign
     for(j=2;j>=0;j--)
     {
       section = (sk[i] >> (j * 4)) & mask;
-      for (j = 0; j < 4; j++)
+      for (l = 0; l < 4; l++)
         group_ge_double(&k, &k);
       
       group_ge_add(&k, &k, &table[section]);
