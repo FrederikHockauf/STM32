@@ -77,9 +77,7 @@ def fe_mul(a, b, print_time=False):
   return p
 
 print("Flag - Before fsq")
-print("XYZ XYZ XYZ XYZ XYZ XYZ XYZ")
 x = dev.readline()
-print("LO LO LO LO LO LO LO LO LO LO")
 print("Flag 1 - Read something")
 print(x.decode()) # 
 print("Flag 2 - We've printed it")

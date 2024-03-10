@@ -214,7 +214,39 @@ void fe25519_mul(fe25519 *r, const fe25519 *x, const fe25519 *y)
 
 void fe25519_square(fe25519 *r, const fe25519 *x)
 {
-  fe25519_mul(r, x, x);
+    c_sqaure(r, x, x);
+    //fe25519_mul(r, x, x);
+}
+
+void c_square(fe25519* r, const fe25519* x)
+{
+    // Initialize the array to store the full product result, as well as loop variables, and the double x value
+	int i, j;
+	uint32_t t[63], double_x;
+	for (i = 0;i < 63;i++)
+		t[i] = 0;
+
+	// Product-scanning, but only going through half of the the cases due to duplicates
+	for (i = 0;i < 32;i++)
+	{
+		// Precompute the value of a double x for the i'th limb
+		double_x = 2 * x->v[i];
+
+		// Handle the cases where x is multiplied by itself
+		t[i * 2] += x->v[i] * x->v[i];
+
+		// Go through the "top half" of the multiplications, but since half of the values are duplicates, use the double_x values
+		for (j = i+1;j < 32;j++)
+			t[i + j] += double_x * x->v[j];
+	}
+
+	// "Reduce" the product by the prime
+	for (i = 32;i < 63;i++)
+		r->v[i - 32] = t[i - 32] + times38(t[i]);
+	r->v[31] = t[31]; /* result now in r[0]...r[31] */
+
+	// Bring the product to a reduced form
+	reduce_mul(r);
 }
 
 #if 0
