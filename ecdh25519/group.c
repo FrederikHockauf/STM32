@@ -28,8 +28,8 @@ const group_ge group_ge_neutral = {{{0}},
 typedef struct
 {
   fe25519 x;
-  fe25519 z;
   fe25519 y;
+  fe25519 z;
   fe25519 t;
 } ge25519_p1p1;
 
