@@ -83,7 +83,7 @@ int main(void)
         fe25519_unpack(&op1, b);
 
         t_start = hal_get_time();
-        fe25519_mul(&r, &op0, &op1);
+        c_mul(&r, &op0, &op1);
         t_stop = hal_get_time();
 
         fe25519_pack(out, &r);
