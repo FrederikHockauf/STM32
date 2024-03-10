@@ -44,13 +44,13 @@ int c_crypto_scalarmult(unsigned char *ss, const unsigned char *sk, const unsign
   k = group_ge_neutral;
 
   // Build up the table of multiples of p
-  /*group_ge table[16];
+  group_ge table[16];
   table[0] = group_ge_neutral;
   for (i = 1; i < 16; i++)
-    group_ge_add(&table[i], &table[i-1], &p);*/
+    group_ge_add(&table[i], &table[i-1], &p);
 
-  //uint8_t mask = 3;
-  //uint8_t section;
+  uint8_t mask = 3;
+  uint8_t section;
 
   for(i=31;i>=0;i--)
   {
