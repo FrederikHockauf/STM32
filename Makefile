@@ -5,7 +5,7 @@ ifdef SRCDIR
 VPATH = $(SRCDIR)
 
 # Add your targets here
-TARGETS = demo.hex ecdh25519_io_test.elf
+TARGETS = demo.hex ecdh25519_test.elf ecdh25519_io_test.elf ecdh25519_speed.elf
 
 all: $(TARGETS)
 
@@ -20,6 +20,8 @@ DEMO_SRC = ecdh25519/io_test.c
 ifeq ($(TARGET),stm32f4)
   DEMO_SRC += demo.S
   DEMO_SRC += ecdh25519/fe25519.c
+  DEMO_SRC += ecdh25519/group.c
+  DEMO_SRC += ecdh25519/smult.c
 endif
 DEMO_OBJ = $(call objs,$(DEMO_SRC))
 demo.elf: $(DEMO_OBJ) libhal.a
