@@ -1,9 +1,12 @@
 #include <hal.h>
 #include <stdio.h>
 
+#include "smult.h"
 #include "fe25519.h"
 
 
+#define SMUL 0
+#define BMUL 1
 #define FSQ  2
 #define FMUL 3
 #define RES  4
@@ -40,10 +43,13 @@ void write_32_byte(const uint8_t data[32])
     hal_putchar(data[31-i]);
 }
 
+
 int main(void)
 {
   hal_setup();
 
+  uint8_t sk[32];
+  uint8_t pk[32];
   uint8_t out[32];
 
   uint8_t a[32];
@@ -54,8 +60,6 @@ int main(void)
 
   uint64_t t_start = 0, t_stop = 0;
 
-  printf("Hello from the dark side\n");
-
   while(1) {
     unsigned char opc;
 
@@ -63,6 +67,23 @@ int main(void)
 
     switch (opc)
     {
+      case BMUL:
+        read_32_byte(sk);
+
+        t_start = hal_get_time();
+        ret = crypto_scalarmult_base(out, sk); 
+        t_stop = hal_get_time();
+
+        break;
+      case SMUL:
+        read_32_byte(sk);
+        read_32_byte(pk);
+
+        t_start = hal_get_time();
+        ret = crypto_scalarmult(out, sk, pk);
+        t_stop = hal_get_time();
+
+        break;
       case FSQ:
         read_32_byte(a);
 
@@ -83,7 +104,7 @@ int main(void)
         fe25519_unpack(&op1, b);
 
         t_start = hal_get_time();
-        c_mul(&r, &op0, &op1);
+        fe25519_mul(&r, &op0, &op1);
         t_stop = hal_get_time();
 
         fe25519_pack(out, &r);
