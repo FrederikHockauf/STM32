@@ -62,6 +62,8 @@ void fe25519_invsqrt(fe25519 *r, const fe25519 *x);
 
 void fe25519_print(const fe25519 *x);
 
+void c_mul(fe25519* r, const fe25519* x, const fe25519* y);
+
 void c_square(fe25519* r, const fe25519* x);
 
 #endif

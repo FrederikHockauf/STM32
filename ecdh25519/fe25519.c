@@ -218,6 +218,110 @@ void fe25519_square(fe25519 *r, const fe25519 *x)
     //fe25519_mul(r, x, x);
 }
 
+void c_mul(fe25519* r, const fe25519* x, const fe25519* y)
+{
+	// Declare loop variables
+	int i, j;
+
+	// Initialise product variables
+	uint32_t x_low[16], y_low[16], x_high[16], y_high[16], middle_x_diff[16], middle_y_diff[16];
+	uint32_t low_prod[32], high_prod[32], middle_prod[32], middle_prod_hat[32], middle_sum[32], middle_sum_hat[32];
+	for (i = 0;i < 16;i++)
+	{
+		x_low[i] = x->v[i];
+		y_low[i] = y->v[i];
+		high_prod[i] = 0;
+		low_prod[i] = 0;
+		middle_prod[i] = 0;
+	}
+
+	// Set the high parts
+	for (i = 16;i < 32;i++)
+	{
+		x_high[i-16] = x->v[i];
+		y_high[i-16] = y->v[i];
+		high_prod[i] = 0;
+		low_prod[i] = 0;
+		middle_prod[i] = 0;
+	}
+
+	// Calculate the low product using schoolbook
+	for (i = 0;i < 16;i++)
+		for (j = 0;j < 16;j++)
+			low_prod[i + j] += x_low[i] * y_low[j];
+
+	// Calculate the high product using schoolbook
+	for (i = 0;i < 16;i++)
+		for (j = 0;j < 16;j++)
+			high_prod[i + j] += x_high[i] * y_high[j];
+	
+	// Find the negative of the high parts using two's complement (only for the 8-bit region)
+	uint8_t mask = ~0;
+	for (i = 0; i < 16; i++)
+	{
+		x_high[i] = (~x_high[i]) & mask;
+		y_high[i] = (~y_high[i]) & mask;
+
+	}
+	x_high[0] += 1;
+	y_high[0] += 1;
+
+	// Calculate the medium differences
+	for (i = 0; i < 16; i++)
+	{
+		middle_x_diff[i] = x_low[i] + x_high[i];
+		middle_y_diff[i] = y_low[i] + y_high[i];
+	}
+
+	// Calculate the middle product using schoolbook
+	for (i = 0;i < 16;i++)
+		for (j = 0;j < 16;j++)
+			middle_prod[i + j] += middle_x_diff[i] * middle_y_diff[j];
+
+	// Handle the built-up carries
+	for (int i = 0; i < 31; i++)
+	{
+		uint32_t carry = middle_prod[i] >> 8;
+		middle_prod[i + 1] += carry;
+		carry <<= 8;
+		middle_prod[i] -= carry;
+	}
+	middle_prod[31] &= mask;
+
+	// Create the alternate sign version of the middle product
+	for (i = 0; i < 16; i++)
+		middle_prod_hat[i] = (~middle_prod[i]) & mask;
+	middle_prod_hat[0] += 1;
+
+	// Determine whether to use the middle product or negated middle product 
+	bool negate = (middle_x_diff[31] & (~mask)) ^ (middle_y_diff[31] & (~mask));
+	for (i = 0; i < 16; i++)
+		middle_prod[i] = (middle_prod[i] * negate) + (middle_prod_hat[i] * (1 - negate));
+
+	// Compute the middle sums of the final result
+	for (i = 0;i < 32;i++)
+		middle_sum[i] = high_prod[i] + low_prod[i] + middle_prod[i];
+
+	// Compute the final result
+	uint32_t result[63];
+	for (i = 0;i < 16;i++)
+		result[i] = low_prod[i];
+	for (i = 16;i < 32;i++)
+		result[i] = low_prod[i] + middle_sum[i - 16];
+	for (i = 32;i < 48;i++)
+		result[i] = middle_sum[i - 16] + high_prod[i - 32];
+	for (i = 48;i < 63;i++)
+		result[i] = high_prod[i - 32];
+
+	// "Reduce" the product by the prime
+	for (i = 32;i < 63;i++)
+		r->v[i - 32] = result[i - 32] + times38(result[i]);
+	r->v[31] = result[31];
+
+	// Bring the product to a reduced form
+	reduce_mul(r);
+}
+
 void c_square(fe25519* r, const fe25519* x)
 {
     // Initialize the array to store the full product result, as well as loop variables, and the double x value
