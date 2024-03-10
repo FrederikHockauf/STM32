@@ -225,7 +225,7 @@ void c_mul(fe25519* r, const fe25519* x, const fe25519* y)
 
 	// Initialise product variables
 	uint32_t x_low[16], y_low[16], x_high[16], y_high[16], middle_x_diff[16], middle_y_diff[16];
-	uint32_t low_prod[32], high_prod[32], middle_prod[32], middle_prod_hat[32], middle_sum[32], middle_sum_hat[32];
+	uint32_t low_prod[32], high_prod[32], middle_prod[32], middle_prod_hat[32], middle_sum[32];
 	for (i = 0;i < 16;i++)
 	{
 		x_low[i] = x->v[i];
@@ -279,7 +279,7 @@ void c_mul(fe25519* r, const fe25519* x, const fe25519* y)
 			middle_prod[i + j] += middle_x_diff[i] * middle_y_diff[j];
 
 	// Handle the built-up carries
-	for (int i = 0; i < 31; i++)
+	for (i = 0; i < 31; i++)
 	{
 		uint32_t carry = middle_prod[i] >> 8;
 		middle_prod[i + 1] += carry;
