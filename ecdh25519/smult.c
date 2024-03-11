@@ -54,10 +54,10 @@ int c_crypto_scalarmult(unsigned char *ss, const unsigned char *sk, const unsign
 
   for(i=31;i>=0;i--)
   {
-    for(j=2;j>=0;j--)
+    for(j=1;j>=0;j--)
     {
       section = (sk[i] >> (j * 4)) & mask;
-      for (l = 0; l < 4; l++)
+      for (l=0; l<4; l++)
         group_ge_double(&k, &k);
       
       group_ge_add(&k, &k, &table[section]);
