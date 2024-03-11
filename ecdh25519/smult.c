@@ -77,27 +77,9 @@ int c_crypto_scalarmult(unsigned char *ss, const unsigned char *sk, const unsign
   return 0;
 }
 
-/*uint64_t fixed_window_4(uint64_t base, uint64_t exponent)
+int c_crypto_scalarmult_base(unsigned char *pk, const unsigned char *sk)
 {
-    //int i, j;
-    //uint8_t array_size = normal_power(2, 4);
-    //uint64_t* table = new uint64_t[array_size];
-
-    //for (i = 0; i < array_size; i++)
-    //    table[i] = normal_power(base, i);
-
-    uint64_t result = 1;
-    uint64_t mask = array_size - 1;
-    uint64_t section;
-
-    for (i = 15;i >= 0;i--)
-    {
-        section = (exponent >> (i * 4)) & mask;
-
-        for (j = 0; j < 4; j++)
-            result = normal_power(result, 2);
-
-        result *= table[section];
-    }
-    return result;
-}*/
+  unsigned char t[GROUP_GE_PACKEDBYTES];
+  group_ge_pack(t, &group_ge_base);
+  return c_crypto_scalarmult(pk, sk, t);
+}

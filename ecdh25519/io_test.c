@@ -71,7 +71,7 @@ int main(void)
         read_32_byte(sk);
 
         t_start = hal_get_time();
-        ret = crypto_scalarmult_base(out, sk); 
+        ret = c_crypto_scalarmult_base(out, sk); 
         t_stop = hal_get_time();
 
         break;
