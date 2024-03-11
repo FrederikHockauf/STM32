@@ -113,6 +113,13 @@ int c_const_crypto_scalarmult(unsigned char *ss, const unsigned char *sk, const 
   return 0;
 }
 
+int c_const_crypto_scalarmult_base(unsigned char *pk, const unsigned char *sk)
+{
+  unsigned char t[GROUP_GE_PACKEDBYTES];
+  group_ge_pack(t, &group_ge_base);
+  return c_crypto_scalarmult(pk, sk, t);
+}
+
 void point_lookup(group_ge *point, group_ge *table, int pos)
 {
     int i;
