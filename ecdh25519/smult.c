@@ -115,10 +115,9 @@ int c_const_crypto_scalarmult(unsigned char *ss, const unsigned char *sk, const 
 
 void point_lookup(group_ge *point, group_ge *table, int pos)
 {
-    int i, j;
+    int i;
     unsigned char equality;
     *point = table[0];
-    uint64_t n_point = 0;
 
     // Go through the entire table and only move the intended target
     for (i = 0; i < 16; i++)
