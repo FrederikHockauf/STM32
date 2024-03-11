@@ -120,18 +120,20 @@ void point_lookup(group_ge *point, group_ge *table, int pos)
     *point = table[0];
     uint64_t n_point = 0;
 
+    // Go through the entire table and only move the intended target
     for (i = 0; i < 16; i++)
     {
         equality = integer_equality(i, pos);
-        point_conditional_move(&point, &table[i], equality);
+        point_conditional_move(point, &table[i], equality);
     }
 }
 
 unsigned char integer_equality(int a, int b)
 {
-    unsigned long long t = a ^ b;
-    t = (-t) >> 63;
-    return 1 - t;
+  // Compute the bit to determine if an element should be moved
+  unsigned long long t = a ^ b;
+  t = (-t) >> 63;
+  return 1 - t;
 }
 
 void point_conditional_move(group_ge* point, group_ge* table_value, unsigned char equality)
@@ -140,6 +142,8 @@ void point_conditional_move(group_ge* point, group_ge* table_value, unsigned cha
     unsigned char* c_value = (unsigned char*)table_value;
     int i;
     equality = -equality;
+
+    // Mask out the values that we're interested in using the equality as a mask
     for (i = 0; i < sizeof(group_ge); i++)
         c_point[i] = (equality & c_value[i]) ^ (~equality & c_point[i]);
 }
